@@ -7,9 +7,16 @@
 
 
 {% block Page_Title  %}
-<h1> Index/Home</h1>
+<h2> Home Page</h2>
 {% endblock Page_Title %}  
 
+
+
+
+
+{% block Profile_Image  %}
+<img  src="{% static 'Profile_Image.jpg' %}"  width="" height="280"> <!--  عرض الصورة -->
+{% endblock Profile_Image %}  
 
 
 
@@ -39,7 +46,7 @@
 
 <div class="article">
 	<br>
-	<img  src="{% static 'Image_Index_Home.png' %}" alt="" width="1500" height="300"> <!--  عرض الصورة -->
+	<img  src="{% static 'Image_Index_Home.png' %}" alt="" width="1500" height="560"> <!--  عرض الصورة -->
 </div>
 
 {% endblock Contents_Page %} 
