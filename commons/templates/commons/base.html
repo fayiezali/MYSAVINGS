@@ -20,31 +20,42 @@
     <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
 </head>
 
-
 <body class="is-preload">
 
 <!-- Base.html Wrapper Start ------------------------------ -->
 <div id="wrapper">
 
+
+
+<!-- <li class="nav-item"> -->
+    <!-- <a class="nav-link d-flex" href="#"> <span>Login</span>   </a>
+    <a class="nav-link d-flex" href="#"> <span>Signup</span>  </a>
+    <a class="nav-link d-flex" href="#"> <span>Logout</span>  </a> -->
+<!-- </li> -->
+
+
+
 <!--Base.html Main  Start ------------------------------ -->
 <div id="main">
+
 <div class="inner">
 
 
 <!-- Base.html - Header_Page Start ------------------------------ -->
-            <header id="header">
-            <div class="logo">
-              
-                <a href="{% url 'Index_URL' %}">My Saving</a>
-<!--- Base.html - Title_Page Start  ----------------------------- -->
-<div class="container">
-  {% block Page_Title  %} 
-  {% endblock Page_Title %}  
-</div>
-<!--- Base.html - Title_Page End' ------------------------------- -->
 
+<header id="header">
+<div class="logo">
+                <a 
+                href="{% url 'Index_URL' %}">My Saving 
+                {% block Page_Title  %} 
+                {% endblock Page_Title %}  
+                </a> 
+<!--- Base.html - Title_Page Start  ----------------------------- -->
+
+<!--- Base.html - Title_Page End' ------------------------------- -->
 </div>
 </header>
+
 
 
 
@@ -92,23 +103,23 @@
 
 <!-- Base.html - Search Box Start ------------------------------ -->
             <section id="search" class="alt">
+            
               <form method="get" action="#">
                 <input type="text" name="search" id="search" placeholder="Search..." />
               </form>
             </section>
 <!-- Base.html - Search Box End ------------------------------ -->
 
+{% if  user.is_authenticated %}
 
+<h4>Welcome (  {{ user.username }}  ) </h4>
 
 
 
 <!--  Base.html - Menu_Page Start- ---------------------------- -->
             <!-- Menu -->
             <nav id="menu">
-            
               <ul>
-                <li><a href="{% url 'Index_URL' %}">Home page</a></li>
-                
                 <li>
                   <span class="opener">Acoount</span>
                   <ul>
@@ -117,13 +128,13 @@
                     <li><a href="#">Password Change</a></li>
                     <li><a href="#">Delete Profile</a></li>
                     <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Logout</a></li>
+                    <li><a href="{% url  'My_Logout_URL'    %}">Logout</a></li>
 
                   </ul>
                 </li>
                 
                 <li>
-                  <span class="opener">Dropdown One</span>
+                  <span class="opener">Association Data</span>
                   <ul>
                     <li><a href="#">First Sub Menu</a></li>
                     <li><a href="#">Second Sub Menu</a></li>
@@ -132,16 +143,39 @@
                 </li>
                 
                 <li>
-                  <span class="opener">Dropdown Two</span>
+                  <span class="opener">Financial Data</span>
                   <ul>
                     <li><a href="#">Sub Menu #1</a></li>
                     <li><a href="#">Sub Menu #2</a></li>
                     <li><a href="#">Sub Menu #3</a></li>
                   </ul>
                 </li>
-                <li><a href="https://www.google.com">External Link</a></li>
+                
+                <li>
+                  <span class="opener">Housing Data</span>
+                  <ul>
+                    <li><a href="#">Sub Menu #1</a></li>
+                    <li><a href="#">Sub Menu #2</a></li>
+                    <li><a href="#">Sub Menu #3</a></li>
+                  </ul>
+                </li>
+
+                <li>
+                  <span class="opener">Personal Data</span>
+                  <ul>
+                    <li><a href="#">Sub Menu #1</a></li>
+                    <li><a href="#">Sub Menu #2</a></li>
+                    <li><a href="#">Sub Menu #3</a></li>
+                  </ul>
+                </li>
+{% else %}
+                <li><a href="{% url 'My_Login_URL' %}">Login    </a></li>
+                <li><a href="#">Signup   </a></li>
+                <li><a href="{% url 'Index_URL'    %}">Home page</a></li>
+                <li><a href="{% url 'About_URL'    %}">About Us </a></li>
               </ul>
             </nav>
+            {% endif %}
 <!--  Base.html - Menu_Page Start- ---------------------------- -->
 
 
@@ -178,27 +212,6 @@
     
     {% endblock Pagination %} 
     -->
-
-
-
-
-
-   <!-- Featured Posts -->
-   <div class="featured-posts">
-  
-    <div class="owl-carousel owl-theme">
-      <a href="#">
-        <div class="featured-item">
-          {% block Profile_Image  %}
-          {% endblock Profile_Image %}  
-          
-        </div>
-      </a>
-     
-    </div>
-  </div>
-   
-
 
 
 

@@ -42,10 +42,13 @@ INSTALLED_APPS = [
 # تسجيل التطبيقات التي أنشأتها في المشروع
     'crispy_forms', # 01 جميلة - التطبيق رقم  "Login.html"  هذا التطبيق وظيفته يجعل شكل صفحة
     'commons', # التطبيق رقم 02
-    # 'accounts', # التطبيق رقم 03
+    'accounts', # التطبيق رقم 03
     # 'social_django',# 04 Login With Social Media(Facebook , Instagram ,......)
     # 'django_countries',# تطبيق معد مسبقاً يحتوي على جميع اسماء دول العالم
 ]
+
+
+CRISPY_TEMPLATE_PACK ='bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -141,7 +144,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #
 LOGIN_REDIRECT_URL = 'Index_URL' # Go To Home Page HTML
 LOGOUT_REDIRECT_URL = 'My_LogoutDone_URL' # Go To LogoutDone.html Page HTML
-LOGIN_ERROR_URL = '/login/'
+LOGIN_ERROR_URL = 'My_Login_URL'
+
 
 #Call Class Sign  In with Email
 AUTHENTICATION_BACKENDS = ['accounts.backends.EmailBackend']
@@ -176,3 +180,4 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
 )
+

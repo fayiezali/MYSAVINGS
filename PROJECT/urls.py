@@ -25,7 +25,8 @@ urlpatterns = [
 #
 #
 urlpatterns += [
-    path('commons/', include('commons.urls')),# Path App Public_Pages    
+    path('commons/', include('commons.urls')),# Path App Public_Pages 
+    path('accounts/', include('accounts.urls')), # This Path I was Created From My App
 ]
 #
 #
