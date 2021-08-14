@@ -25,13 +25,13 @@ urlpatterns = [
 #
 #
 urlpatterns += [
-    path('commons/', include('commons.urls')),# Path App Public_Pages 
-    path('accounts/', include('accounts.urls')), # This Path I was Created From My App
+    path('accounts/', include('django.contrib.auth.urls')), # This Path Coming From Django App
 ]
 #
 #
 urlpatterns += [
-    path('accounts/', include('django.contrib.auth.urls')), # This Path Coming From Django App
+    path('commons/', include('commons.urls')),# Path App Public_Pages 
+    path('accounts/', include('accounts.urls')), # This Path I was Created From My App
 ]
 #
 #
