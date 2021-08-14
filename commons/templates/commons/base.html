@@ -45,18 +45,19 @@
 
 <header id="header">
 <div class="logo">
-                <a 
-                href="{% url 'Index_URL' %}">My Saving 
-                {% block Page_Title  %} 
-                {% endblock Page_Title %}  
+                <a
+                href="{% url 'Index_URL' %}"> My Saving 
+               
                 </a> 
 <!--- Base.html - Title_Page Start  ----------------------------- -->
 
 <!--- Base.html - Title_Page End' ------------------------------- -->
+
 </div>
+
 </header>
-
-
+{% block Page_Title  %} 
+{% endblock Page_Title %}  
 
 
 
@@ -112,7 +113,7 @@
 
 {% if  user.is_authenticated %}
 
-<h4>Welcome (  {{ user.username }}  ) </h4>
+<p  class="mt-0">  Welcome (  {{ user.username }}  ) </p>
 
 
 
@@ -125,7 +126,7 @@
                   <ul>
                     <li><a href="#">Profile</a></li>
                     <li><a href="#">Password Reset</a></li>
-                    <li><a href="#">Password Change</a></li>
+                    <li><a href="{% url 'My_PasswordChange_URL' %}">Password Change</a></li>
                     <li><a href="#">Delete Profile</a></li>
                     <li><a href="#">Contact Us</a></li>
                     <li><a href="{% url  'My_Logout_URL'    %}">Logout</a></li>
