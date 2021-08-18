@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'crispy_forms', # 01 جميلة - التطبيق رقم  "Login.html"  هذا التطبيق وظيفته يجعل شكل صفحة
     'commons', # التطبيق رقم 02
     'accounts', # التطبيق رقم 03
+    'widget_tweaks', # التطبيق رقم 04
     # 'social_django',# 04 Login With Social Media(Facebook , Instagram ,......)
     # 'django_countries',# تطبيق معد مسبقاً يحتوي على جميع اسماء دول العالم
 ]
@@ -144,7 +145,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #
 LOGIN_REDIRECT_URL = 'Index_URL' # Go To Home Page HTML
 LOGOUT_REDIRECT_URL = 'My_LogoutDone_URL' # Go To LogoutDone.html Page HTML
-LOGIN_ERROR_URL = 'My_Login_URL'
+LOGIN_ERROR_URL = 'login'
 
 
 #Call Class Sign  In with Email

@@ -8,7 +8,11 @@
 
 
 {% block Page_Title  %}
+
+<div class="row justify-content-center">
 <h1>Login</h1>
+</div>
+
 {% endblock Page_Title %}  
 
 
@@ -18,11 +22,13 @@
 
 
 {% block Contents_Page %} 
+
 <div class="row justify-content-center">
 <div class="col-4.5">
 <div class="card">
 <div class="card-body">
-<form enctype="multipart/form-data" " method="post" novalidate>
+
+<form enctype="multipart/form-data"  method="post" novalidate>
         {% csrf_token %} 
         {{ form|crispy }}
             <button type="submit" class="btn btn-success">Login</button>  
@@ -31,8 +37,8 @@
 </form>
 </div>
 </div>
-<p  class="mt-4"> Have You Lost The Password? <a  class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline" href="" > Forgot Password? </a> </p>
-<p class="mt-1"> Create New Accounts  <a class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline" href="" > Signup </a> </p>
+<p  class="mt-4"> Have You Lost The Password? <a  class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline" href="{% url 'password_reset' %}" > Forgot Password? </a> </p>
+<p class="mt-1"> Create New Accounts  <a class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline" href="{% url 'My_Signup_URL' %}" > Signup </a> </p>
 </div>
 </div>
 
