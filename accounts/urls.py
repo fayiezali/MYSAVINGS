@@ -16,9 +16,14 @@ urlpatterns = [
         path('logout/'                                  , auth_views.LogoutView.as_view(), 
         name='logout'),
         #
+        # Logout Confirme 
+        path('my_logout_confirm/'                        , views.My_LogoutConfirm.as_view(),
+        name='My_LogoutConfirm_URL'), 
+        #
         # Checkout Confirmed Successfull
         path('my_logout_done/'                          , views.My_LogoutDone.as_view(),
         name='My_LogoutDone_URL'), 
+        
 ]
 #
 #
@@ -66,9 +71,6 @@ urlpatterns += [
 #
 #
 #
-#
-#
-#
 # PROFILE:--------------------------------------------------------------------
 # URL For Profile (1)
 urlpatterns +=[
@@ -81,3 +83,32 @@ urlpatterns +=[
 #
 #
 # Profile Action:
+# URL For Profile(2)
+urlpatterns += [
+        # path('my_profile_contact_us/'               , views.My_ProfileContactUs                 , name='My_Profile_Contact_Us'),
+        # #
+        path('my_profile_update/<int:pk>/'          , views.My_Profile_Update.as_view()          , name='my_profile_update_URL'),
+        # # Delete Profile
+        path('my_Profile_delete/<int:pk>/delete/'   , views.My_Profile_Delete.as_view()          , name='My_Profile_delete_URL'),
+        # # View a List Of The Profiles 
+        path('my_profile_list/'                     , views.my_profile_list.as_view()           , name='my_profile_list_URL'),
+        # # View Profile Details By (slug)
+        path('my_profile_detail_slug/<slug:slug>/'  , views.My_Profile_Detail_Slug.as_view()    , name='My_Profile_Detail_Slug_URL'), 
+        # #*********************************************************************************
+        # # View Profile Details By (ID)
+        path('my_Profile_Detail_ID/<int:pk>/'       , views.My_Profile_Detail_ID.as_view()      , name='My_Profile_Detail_ID_URL'),
+        # Show Details In The Profile - But The code Is Written In The Model
+        # path('associationdetailid/<int:pk>/'       , AssociationDetailViewID.as_view()   , name='AssociationData_MODEL-detail'),
+        # <td><a href="{{ object_list_item.get_absolute_url }}">{{ object_list_item.ASS_NameAssociation }}</a> ({{object_list_item.ASS_Phone}})</td> <!-- This Link Is From The Database and usls.py File-->
+        #*********************************************************************************
+]
+#
+#
+#
+# Profile Action:
+# URL For Profile(3)
+urlpatterns += [
+        # Checkout Confirmed Successfull
+        path('my_profile_delete_done/'                          , views.My_Profile_Delete_Done.as_view(),
+        name='My_Profile_Delete_Done_URL'), 
+]

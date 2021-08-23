@@ -11,8 +11,19 @@ from django.utils.encoding import force_bytes #
 from django.contrib.auth.tokens import default_token_generator #
 from django.core.mail import EmailMessage #
 from django.contrib import messages
+from django.utils import timezone
+from django.views.generic import TemplateView , ListView ,DetailView , DeleteView, UpdateView  , FormView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+
 #
 UserModel = get_user_model()
+#
+#
+#
+# Display The my_Profile_delete_done Page
+class My_LogoutConfirm(TemplateView):
+    template_name = 'registration/my_logout_confirm.html' # The Page HTML to Display
 #
 #
 #
@@ -53,10 +64,12 @@ class My_Signup(View):
             # Display Message For The New User On The Registration Page
             return render(request, 'registration/confirm_email_registration.html', {'message': f'A confirmation email has been sent to {user.email}. Please confirm to finish registering'})
         else:
+            # Reload The Form  Registration Agin
             return render(request, self.template_name, {'form': form})
 #
 #
 #
+# Activate E-mail
 class Activate(View):
     def get(self, request, uidb64  , token):
         try:
@@ -75,3 +88,72 @@ class Activate(View):
 #
 #
 #
+#
+#
+#
+# Display List Record
+class my_profile_list(LoginRequiredMixin , ListView):
+    model = User # Data Table
+    paginate_by = 4  # if pagination is desired
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['now'] = timezone.now() # Data To Be Sent To Page HTML
+        return context # Send This Data To The Required Page HTML
+    template_name = 'registration/my_profile_list.html'# The Page HTML to Display
+#
+#
+#
+#
+#
+#
+# Display Detail Record By: Slug
+class My_Profile_Detail_Slug(LoginRequiredMixin ,  DetailView):
+    model = User # Data Table
+    slug_field = 'ASS_Slug' # Filter Field Use 'Slug'
+    context_object_name = 'My_Object' # Data To Be Sent To Page HTML
+    template_name = 'registration/my_profile_detail_slug.html'# The Page HTML to Display
+#
+#
+#
+## Display Detail Record By: ID
+class My_Profile_Detail_ID(LoginRequiredMixin , DetailView):
+    model = User # Data Table
+    slug_field = 'pk' # Filter Field Use 'PK"
+    context_object_name = 'My_Object' # Data To Be Sent To Page HTML
+    template_name = 'registration/my_profile_detail_ID.html'# The Page HTML to Display
+#
+#
+#
+# Update Profile.
+class My_Profile_Update(UpdateView):
+        model = User # Data Table
+        fields = [ # Fields Table
+            'last_login',
+            'is_superuser', 
+            'username', 
+            'last_name',
+            'email',
+            'is_staff', 
+            'is_active', 
+            'date_joined',
+            'first_name',
+            ]
+        template_name = 'registration/My_Profile_Update.html'# The Page HTML to Display
+        success_url = reverse_lazy('my_profile_list_URL')# Go to This Page After Successful Operation
+#
+#
+#
+# Delete Record.
+class My_Profile_Delete(LoginRequiredMixin  , DeleteView):
+    model = User # Data Table
+    template_name = 'registration/my_profile_confirm_delete.html' # The Page HTML to Display
+    success_url = reverse_lazy('My_Profile_Delete_Done_URL') # Go to This Page After Successful Operation
+#
+#
+#
+# Display The my_Profile_delete_done Page
+class My_Profile_Delete_Done(TemplateView):
+    template_name = 'registration/my_profile_delete_done.html' # The Page HTML to Display
+#
+#
+

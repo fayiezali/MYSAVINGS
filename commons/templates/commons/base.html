@@ -116,6 +116,7 @@
 <p  class="mt-0">  Welcome (  {{ user.username }}  ) </p>
 <li><a href="{% url 'Index_URL'     %}">Home page</a></li>
 <li><a href="{% url 'About_URL'     %}">About Us </a></li>
+<li><a href="{% url 'my_profile_list_URL'   %}">Profile List</a></li>
 
 
 
@@ -127,12 +128,11 @@
                 <li>
                   <span class="opener">Acoount</span>
                   <ul>
-                    <li><a href="#">Profile</a></li>
-                    <li><a href="{% url 'password_reset'        %}">Password Reset</a></li>
-                    <li><a href="{% url 'password_change' %}">Password Change</a></li>
-                    <li><a href="#">Delete Profile</a></li>
+                    <li><a href="{% url 'password_reset'                  %}">Password Reset</a></li>
+                    <li><a href="{% url 'password_change'                 %}">Password Change</a></li>
+                    <li><a href="{% url 'My_Profile_delete_URL'  user.pk  %}">Delete Profile</a></li>
                     <li><a href="#">Contact Us</a></li>
-                    <li><a href="{% url  'logout'        %}">Logout</a></li>
+                    <li><a href="{% url  'My_LogoutConfirm_URL'               %}">Logout</a></li>
 
                   </ul>
                 </li>
@@ -173,10 +173,12 @@
                   </ul>
                 </li>
 {% else %}
-                <li><a href="{% url 'login'         %}">Login    </a></li>
-                <li><a href="{% url 'My_Signup_URL' %}">Signup   </a></li>
-                <li><a href="{% url 'Index_URL'     %}">Home page</a></li>
-                <li><a href="{% url 'About_URL'     %}">About Us </a></li>
+                <li><a href="{% url 'admin:login'  %}">Staff Login   </a></li>
+                <li><a href="{% url 'login'         %}">Member LoginL</a></li>
+                <li><a href="{% url 'My_Signup_URL' %}">Sign Up       </a></li>
+                <li><a href="{% url 'Index_URL'     %}">Home Page    </a></li>
+                <li><a href="{% url 'About_URL'     %}">About Us     </a></li>
+
               </ul>
             </nav>
             {% endif %}
