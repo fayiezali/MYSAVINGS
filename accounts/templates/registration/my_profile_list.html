@@ -41,8 +41,204 @@
 
 {% block Contents_Page %} 
 
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+ {% comment %} <h2 class="text-gray-800">{% block title %}{% trans "Imported Entries" %}{% endblock %}</h2> {% endcomment %}
+  <a role="button" class="btn btn-success" href="#"><i
+          class="fas fa-plus-circle"></i> Import New Entires</a>
+</div>
+
+<!-- Content Row -->
+<div class="row">
+
+  <div class="col-md-12">
+      <div class="card shadow mb-4">
+          <div class="card-body">
+              <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                  <div class="row">
+                  </div>
+                  <div class="row">
+                      <div class="col-sm-12">
+                          <table class="table-responsive-xl table table-hover table-striped table-bordered dataTable" id="dataTable" width="100%"
+                                 cellspacing="0" role="grid" aria-describedby="dataTable_info">
+                              <thead>
+                              <tr role="row">
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">
+                                  </th>
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">ID
+                                  </th>
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">Date
+                                  </th>
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">Trade
+                                  </th>
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">Type
+                                  </th>
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">Symbol
+                                  </th>
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">Amount
+                                  </th>
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">Price
+                                  </th>
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">Fee
+                                  </th>
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">Reg Fee
+                                  </th>
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">Ref
+                                  </th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              {% for entry in object_list %}
+                              <tr role="row">
+                                  <td class="text-center">
+                                      <div class="custom-control-lg custom-control custom-checkbox">
+                                          <input type="checkbox" class="custom-control-input form-control-lg" data-id="{{ entry.pk}}" id="check{{ entry.pk }}">
+                                          <label class="custom-control-label" for="check{{ entry.pk }}"></label>
+                                      </div>
+                                  </td>
+                                  <td><a href="#">{{ entry.pk }}</a></td>
+                                  <td>{{ entry.date | date:"M d, Y h:i:s A"}}</td>
+                                  <td><a href="/trade/{{ entry.trade.id }}">{{ entry.trade.id }}</a></td>
+                                  <td>{{ entry.entry_type }}</td>
+                                  <td>{{ entry.symbol }}</td>
+                                  <td>{{ entry.amount }}</td>
+                                  <td>{{ entry.price }}</td>
+                                  <td>{{ entry.fee }}</td>
+                                  <td>{{ entry.reg_fee }}</td>
+                                  <td>{{ entry.transaction_id }}</td>
+                              </tr>
+                              {% endfor %}
+
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+                  <!--Pagination-->
+                  <div class="row">
+                      <div class="col-12 ">
+
+
+                          <div class="pagination">
+                              <span class="step-links">
+                                  {% if page_obj.has_previous %}
+                                      <a href="?page=1">&laquo; first</a>
+                                      <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                                  {% endif %}
+
+                                  <span class="current">
+                                      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                                  </span>
+
+                                  {% if page_obj.has_next %}
+                                      <a href="?page={{ page_obj.next_page_number }}">next</a>
+                                      <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                                  {% endif %}
+                              </span>
+                          </div>
+
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div>
 <a  href="{% url 'My_Signup_URL' %}" role="button" style="float:right" class="btn btn-success">Add New</a><!-- إضافة سجل جديد -->
+<br>
 <br>
 </div>
 <br>
@@ -50,7 +246,7 @@
 <table class="table table-bordered" class="data-table table nowrap">
         <thead>
             <tr>
-                <th class="table-plus datatable-nosort">Image</th>
+                <th>Image</th>
                 <th>ID User</th>
                 <th>User Name</th>
                 <th>First Name</th>
@@ -62,6 +258,8 @@
                 <th>Date Joined</th>
                 <th>Last Login</th>
                 <th>Actions</th>
+                <th>Select</th>
+
             </tr>
         </thead>
 
@@ -97,6 +295,7 @@ Loop To Pass through All The Data to Be displayed
         </div>
     </div>
 </td>
+
 
 </tr>
 {% endfor %}
