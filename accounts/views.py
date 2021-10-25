@@ -1,3 +1,4 @@
+import django
 from django.shortcuts import render #
 from django.contrib.auth.models import User # إستيراد اسم المستخدم
 from django.contrib.auth import  get_user_model #
@@ -156,4 +157,62 @@ class My_Profile_Delete_Done(TemplateView):
     template_name = 'registration/my_profile_delete_done.html' # The Page HTML to Display
 #
 #
+#
+from django.http import JsonResponse
+class My_Profile_Delete_Multiple_Select(LoginRequiredMixin, ListView):
+    context_object_name = 'entry_list' # Data List To Send Page HTML
+    paginate_by =  100
+    # paginate_by =  5
+    #ordering = ['-pk']
+    model = User # Table Name In Database
+    template_name = "portfolios/entry_list.html" # Page HTML Containing The Data List
 
+    def get_queryset(self):
+        return User.objects.filter(created_by=self.request.user).order_by('-pk')
+
+    def post(self, request, *args, **kwargs):
+        ids = self.request.POST.get('ids', "")
+        # ids if string like "1,2,3,4"
+        ids = ids.split(",")
+        try:
+            # Check ids are valid numbers
+            ids = map(int, ids)
+        except ValueError as e:
+            return JsonResponse(status=400)
+        # delete items
+        self.model.objects.filter(id__in=ids).delete()
+        return JsonResponse({"status": "ok"}, status=204)
+
+# from django.http import JsonResponse
+# class My_Profile_Delete_Multiple_Select(LoginRequiredMixin, ListView):
+#     context_object_name = 'entry_list' # Data List To Send Page HTML
+#     paginate_by =  100
+#     # paginate_by =  5
+#     #ordering = ['-pk']
+#     model = User # Table Name In Database
+#     template_name = "portfolios/entry_list.html" # Page HTML Containing The Data List
+
+#     def get_queryset(self):
+#         return User.objects.filter(created_by=self.request.user).order_by('-pk')
+
+#     def post(self, request, *args, **kwargs):
+#         ids = self.request.POST.get('ids', "")
+#         # ids if string like "1,2,3,4"
+#         ids = ids.split(",")
+#         try:
+#             # Check ids are valid numbers
+#             ids = map(int, ids)
+#         except ValueError as e:
+#             return JsonResponse(status=400)
+#         # delete items
+#         self.model.objects.filter(id__in=ids).delete()
+#         return JsonResponse({"status": "ok"}, status=204)
+def Profile_List_Search(self,*args,**kwargs):
+    name = None
+    pro = User.objects.all()
+    if 'search' in request.GET:
+        name = request.GET['search']
+        if name:
+            pro=User.filter(first_name_icontains=name)
+    context = {'user':pro}
+    return render(request , 'my_profile_list.html' , context)

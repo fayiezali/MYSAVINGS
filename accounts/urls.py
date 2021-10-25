@@ -101,6 +101,8 @@ urlpatterns += [
         # path('associationdetailid/<int:pk>/'       , AssociationDetailViewID.as_view()   , name='AssociationData_MODEL-detail'),
         # <td><a href="{{ object_list_item.get_absolute_url }}">{{ object_list_item.ASS_NameAssociation }}</a> ({{object_list_item.ASS_Phone}})</td> <!-- This Link Is From The Database and usls.py File-->
         #*********************************************************************************
+        path('my_Profile_delete/<int:pk>/delete/'   , views.My_Profile_Delete_Multiple_Select.as_view()          , name='My_Profile_Delete_Multiple_Select_URL'),
+
 ]
 #
 #
