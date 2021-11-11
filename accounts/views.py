@@ -16,6 +16,8 @@ from django.utils import timezone
 from django.views.generic import TemplateView , ListView ,DetailView , DeleteView, UpdateView  , FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+from django.db.models import Q # new
+from django.http import JsonResponse
 
 #
 UserModel = get_user_model()
@@ -93,14 +95,30 @@ class Activate(View):
 #
 #
 # Display List Record
-class my_profile_list(LoginRequiredMixin , ListView):
-    model = User # Data Table
+class My_Profile_ListView_Search(LoginRequiredMixin , ListView):    
     paginate_by = 4  # if pagination is desired
+    template_name = 'registration/my_profile_list.html'# The Page HTML to Display
+    #
+    def get_queryset(self):
+        object_list = User.objects.all()
+        query = self.request.GET.get('q')# Save Searvh Criterian In a Variable
+        if query:
+            # Save Search Results In a Variable
+            object_list = User.objects.filter(
+            Q(id__icontains=query)          |# ID Number
+            Q(first_name__icontains=query)  |# First Name
+            Q(last_name__icontains=query)   |# Last Name
+            Q(email__icontains=query)       |# Email
+            Q(is_active__icontains=query)    # User Is Active
+            
+        )
+        return object_list # Send Search Results To The Disired  Page HTML
+        #
+        #Send Extra Data To Pahge HTML
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['now'] = timezone.now() # Data To Be Sent To Page HTML
         return context # Send This Data To The Required Page HTML
-    template_name = 'registration/my_profile_list.html'# The Page HTML to Display
 #
 #
 #
@@ -140,7 +158,7 @@ class My_Profile_Update(UpdateView):
             'first_name',
             ]
         template_name = 'registration/My_Profile_Update.html'# The Page HTML to Display
-        success_url = reverse_lazy('my_profile_list_URL')# Go to This Page After Successful Operation
+        success_url = reverse_lazy('My_Profile_ListView_Search')# Go to This Page After Successful Operation
 #
 #
 #
@@ -158,7 +176,6 @@ class My_Profile_Delete_Done(TemplateView):
 #
 #
 #
-from django.http import JsonResponse
 class My_Profile_Delete_Multiple_Select(LoginRequiredMixin, ListView):
     context_object_name = 'entry_list' # Data List To Send Page HTML
     paginate_by =  100
@@ -207,12 +224,13 @@ class My_Profile_Delete_Multiple_Select(LoginRequiredMixin, ListView):
 #         # delete items
 #         self.model.objects.filter(id__in=ids).delete()
 #         return JsonResponse({"status": "ok"}, status=204)
-def Profile_List_Search(self,*args,**kwargs):
-    name = None
-    pro = User.objects.all()
-    if 'search' in request.GET:
-        name = request.GET['search']
-        if name:
-            pro=User.filter(first_name_icontains=name)
-    context = {'user':pro}
-    return render(request , 'my_profile_list.html' , context)
+# def Profile_List_Search(self,*args,**kwargs):
+#     name = None
+#     pro = User.objects.all()
+#     if 'search' in request.GET:
+#         name = request.GET['search']
+#         if name:
+#             pro=User.filter(first_name_icontains=name)
+#     context = {'user':pro}
+#     return render(request , 'my_profile_list.html' , context)
+

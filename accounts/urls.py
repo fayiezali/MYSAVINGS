@@ -91,7 +91,7 @@ urlpatterns += [
         # # Delete Profile
         path('my_Profile_delete/<int:pk>/delete/'   , views.My_Profile_Delete.as_view()          , name='My_Profile_delete_URL'),
         # # View a List Of The Profiles 
-        path('my_profile_list/'                     , views.my_profile_list.as_view()           , name='my_profile_list_URL'),
+        path('my_profile_list/'                     , views.My_Profile_ListView_Search.as_view() , name='My_Profile_ListView_Search'),
         # # View Profile Details By (slug)
         path('my_profile_detail_slug/<slug:slug>/'  , views.My_Profile_Detail_Slug.as_view()    , name='My_Profile_Detail_Slug_URL'), 
         # #*********************************************************************************

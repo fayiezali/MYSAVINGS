@@ -49,7 +49,6 @@
 <div class="logo">
                 <a
                 href="{% url 'Index_URL' %}"> My Saving 
-               
                 </a> 
 <!--- Base.html - Title_Page Start  ----------------------------- -->
 
@@ -107,8 +106,8 @@
 <!-- Base.html - Search Box Start ------------------------------ -->
             <section id="search" class="alt">
             
-              <form method="get" action="#">
-                <input type="text" name="search" id="search" placeholder="Search..." />
+              <form action="#" method="get">
+                <input type="text" name="#" id="search" placeholder="Put Hire What You Want To Search...">
               </form>
             </section>
 <!-- Base.html - Search Box End ------------------------------ -->
@@ -118,7 +117,7 @@
 <p  class="mt-0">  Welcome (  {{ user.username }}  ) </p>
 <li><a href="{% url 'Index_URL'     %}">Home page</a></li>
 <li><a href="{% url 'About_URL'     %}">About Us </a></li>
-<li><a href="{% url 'my_profile_list_URL'   %}">Profile List</a></li>
+<li><a href="{% url 'My_Profile_ListView_Search'   %}">Profile List</a></li>
 
 
 

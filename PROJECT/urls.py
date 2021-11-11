@@ -25,12 +25,12 @@ urlpatterns = [
 #
 #
 urlpatterns += [
-    path('accounts/', include('django.contrib.auth.urls')), # This Path Coming From Django App
+    path('accounts/' , include('django.contrib.auth.urls')), # This Path Coming From Django App
 ]
 #
 #
 urlpatterns += [
-    path('commons/', include('commons.urls')),# Path App Public_Pages 
+    path('commons/' , include('commons.urls')) ,  # Path App Public_Pages 
     path('accounts/', include('accounts.urls')), # This Path I was Created From My App
 ]
 #
@@ -41,8 +41,8 @@ urlpatterns += [
 #
 # Download These Folders If There are No Errors In the Serveer
 if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL,  document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL , document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL  , document_root=settings.MEDIA_ROOT)
 #
 #
 # urlpatterns += [
