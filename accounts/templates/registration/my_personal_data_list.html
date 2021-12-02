@@ -11,8 +11,8 @@
 
 
 {% block Page_Title  %}
-<h1>List of All  Subscribers</h1>
-<!-- <h1>{{ now }}</h1> -- >
+<h1>List of Profile</h1>
+<!-- <h1>{{ now }}</h1> -->
 {% endblock Page_Title %}  
 
 
@@ -148,7 +148,7 @@
                               </tr>
                               </thead>
                               <tbody>
-                              {% for object_list_item in queryset_users_list %} 
+                              {% for object_list_item in users_list %} 
 
                               <tr role="row">
                                   <td class="text-center">
@@ -221,17 +221,7 @@
 
 </div>
 
-{% endblock Contents_Page %} 
 
-
-
-
-
-
-
-
-
-{% comment %}
 <!-- Content Row -->
 <div class="row">
 
@@ -308,6 +298,7 @@
                                     {% for object_list_personal_data_item in personal_data %} 
 
                                 <tr role="row">
+                                {% comment %}
                                     <!-- <td class="text-center">
                                         <div class="custom-control-lg custom-control custom-checkbox">
                                             <input name="checkbox_select_item_for_delete" type="checkbox" class="custom-control-input form-control-lg" data-id="{{ object_list_item.pk}}" id="check{{ object_list_item.pk }}">
@@ -327,6 +318,7 @@
                                           </div>
                                       </div>
                                   </td> -->
+                                  {% endcomment %}
                                   <td>{{ object_list_personal_data_item.pk  }}</td> 
                                   <td><img src="{{ object_list_personal_data_item.PER_ImgePersonal.url}}" alt="" width="150" height="90"></td>
                                   <td>{{ object_list_personal_data_item.PER_Customer  }}</td> 
@@ -381,9 +373,7 @@
     </div>
   
   </div>
-
-
-  {% endcomment %}
+  
 
 {% comment %}
                 <div>
@@ -695,6 +685,8 @@
 </body>
 </html>
 {% endcomment %}
+
+{% endblock Contents_Page %} 
 
 
 

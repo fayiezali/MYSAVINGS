@@ -11,8 +11,8 @@
 
 
 {% block Page_Title  %}
-<h1>List of All  Subscribers</h1>
-<!-- <h1>{{ now }}</h1> -- >
+<h1>List of Profile</h1>
+<h1>{{ now }}</h1>
 {% endblock Page_Title %}  
 
 
@@ -181,6 +181,175 @@
                                 <td>{{ object_list_item.is_superuser }}</td>
                                 <td>{{ object_list_item.date_joined | date:"M d, Y h:i:s A"}}</td>
                                 <td>{{ object_list_item.last_login  | date:"M d, Y h:i:s A"}}</td>
+                                
+                              </tr>
+                              {% endfor %}
+
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+            <!--Pagination Start -->
+            
+                  <div class="row">
+                      <div class="col-12 ">
+                          <div class="pagination">
+                              <span class="step-links">
+                                  {% if page_obj.has_previous %}
+                                      <a href="?page=1">&laquo; first</a>
+                                      <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                                  {% endif %}
+
+                                  <span class="current">
+                                      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                                  </span>
+
+                                  {% if page_obj.has_next %}
+                                      <a href="?page={{ page_obj.next_page_number }}">next</a>
+                                      <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                                  {% endif %}
+                              </span>
+                          </div>
+                      </div>
+                  </div>
+            <!--Pagination End -->
+              </div>
+          </div>
+      </div>
+
+  </div>
+
+</div>
+############################
+<div class="d-sm-flex align-items-left  mb-4">
+
+    <a href="{% url 'My_Signup_URL' %}" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New</span></a>
+    <a href="#" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>	
+<br>
+<!-- Base.html - Search Box Start ------------------------------ -->
+
+            <section id="search" class="alt"> 
+            <form action="{% url 'My_Profile_ListView_Search_URL' %}" method="get">
+            <input type="text" name="q" id="search" placeholder="Type To Search.......">
+
+            </form>
+            </section>
+            
+<!-- Base.html - Search Box End ------------------------------ -->
+
+</div>
+
+
+<!-- Content Row -->
+<div class="row">
+
+  <div class="col-md-0">
+      <div class="card shadow mb-4">
+          <div class="card-body">
+              <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                  <div class="row">
+                  </div>
+                  <div class="row">
+                      <div class="col-sm-12">
+                          <table class="table-responsive-xl table table-hover table-striped table-bordered dataTable" id="dataTable" width="100%"
+                                 cellspacing="0" role="grid" aria-describedby="dataTable_info">
+                              <thead>                              
+                                  <tr role="row">
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">Select
+                                  </th>
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                  colspan="1" aria-label="" style="">Actions
+                                </th>
+                                  <!-- <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">Image
+                                  </th> -->
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">ID User
+                                  </th>
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">Customer Name
+                                  </th>
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                  colspan="1" aria-label="" style="">Avialable
+                                  </th>
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">Slug
+                                  </th>
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">First Name
+                                  </th>
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                  colspan="1" aria-label="" style="">Father  Name
+                                 </th>
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">Grand Father Name
+                                  </th>
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">Family Name
+                                  </th>
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">Imge Personal
+                                  </th>
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">ID Number
+                                  </th>
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">Nationality
+                                  </th>
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">Mobile
+                                  </th>
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">Social Status Married
+                                  </th>                                  
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">Social Status Unmarried
+                                  </th>                                  
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">Data Joined
+                                  </th>                                  
+                              </tr>
+                              </thead>
+                              <tbody>
+                              {% for object_list_item in queryset_personal_data %} 
+
+                              <tr role="row">
+                                  <td class="text-center">
+                                      <div class="custom-control-lg custom-control custom-checkbox">
+                                          <input name="checkbox_select_item_for_delete" type="checkbox" class="custom-control-input form-control-lg" data-id="{{ object_list_item.pk}}" id="check{{ object_list_item.pk }}">
+                                          <label class="custom-control-label" for="check{{ object_list_item.pk }}"></label>
+                                      </div>
+                                  </td>
+                                  <td>
+                                    <div class="dropdown">
+                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                            <i class="dw dw-more"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                            <a class="dropdown-item" href="{% url 'My_Profile_Detail_ID_URL' object_list_item.id  %}"><i class="dw dw-eye"></i> View</a>
+                                            <a class="dropdown-item" href="{% url 'my_profile_update_URL'    object_list_item.id  %}"><i class="dw dw-edit2"></i> Edit</a>
+                                            <a class="dropdown-item" href="{% url 'My_Profile_delete_URL'    object_list_item.id  %}"><i class="dw dw-delete-3"></i> Delete</a>
+                                            <!-- <a class="dropdown-item" href="Delete_Messages_Modal"><i class="dw dw-delete-3"></i> Delete</a> -->
+                                        </div>
+                                    </div>
+                                </td>
+                                <!-- <td><img src="{{ object_list_item.ASS_AssociationLogo.url}}" alt="" width="150" height="90"></td> -->
+                                <td>{{ object_list_item.pk  }}</td> 
+                                <td>{{ object_list_item.PER_Customer }}</td>
+                                <td>{{ object_list_item.PER_Avialable }}</td>
+                                <td>{{ object_list_item.FER_Slug }}</td>
+                                <td>{{ object_list_item.PER_FirstName }}</td>
+                                <td>{{ object_list_item.PER_FatherName }}</td>
+                                <td>{{ object_list_item.PER_GrandFatherName }}</td>
+                                <td>{{ object_list_item.PER_FamilyName }}</td>
+                                <td>{{ object_list_item.PER_ImgePersonal }}</td>
+                                <td>{{ object_list_item.PER_IdNumber }}</td>
+                                <td>{{ object_list_item.PER_Nationality  }}</td> 
+                                <td>{{ object_list_item.PER_Mobile  }}</td> 
+                                <td>{{ object_list_item.PER_SocialStatusMarried  }}</td> 
+                                <td>{{ object_list_item.PER_SocialStatusUnmarried}}</td>
+                                <td>{{ object_list_item.PER_Date_joined  | date:"M d, Y h:i:s A"}}</td>
                                 
                               </tr>
                               {% endfor %}

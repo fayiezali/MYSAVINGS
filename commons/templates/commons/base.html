@@ -115,9 +115,9 @@
 {% if  user.is_authenticated %}
 
 <p  class="mt-0">  Welcome (  {{ user.username }}  ) </p>
-<li><a href="{% url 'Index_URL'     %}">Home page</a></li>
-<li><a href="{% url 'About_URL'     %}">About Us </a></li>
-<li><a href="{% url 'My_Profile_ListView_Search'   %}">Profile List</a></li>
+<li><a href="{% url 'Index_URL'     %}">(1) - Home page</a></li>
+<li><a href="{% url 'About_URL'     %}">(2) - About Us </a></li>
+<li><a href="{% url 'My_Profile_ListView_Search_URL'   %}">(3) - All  Subscribers</a></li>
 
 
 
@@ -127,58 +127,41 @@
             
               <ul>
                 <li>
-                  <span class="opener">Acoount</span>
+                  <span class="opener">(A) - My Acoount</span>
                   <ul>
-                    <li><a href="{% url 'password_reset'                  %}">Password Reset</a></li>
-                    <li><a href="{% url 'password_change'                 %}">Password Change</a></li>
-                    <li><a href="{% url 'My_Profile_delete_URL'  user.pk  %}">Delete Profile</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="{% url  'My_LogoutConfirm_URL'               %}">Logout</a></li>
+                    <li><a href="{% url 'password_reset'                  %}">1- Password Reset</a></li>
+                    <li><a href="{% url 'password_change'                 %}">2- Password Change</a></li>
+                    <li><a href="{% url 'My_Profile_delete_URL'  user.pk  %}">3- Delete Profile</a></li>
+                    <li><a href="#"                                          >4- Contact Us</a></li>
+                    <li><a href="{% url  'My_LogoutConfirm_URL'           %}">5- Logout</a></li>
 
                   </ul>
                 </li>
-                
+                                
                 <li>
-                  <span class="opener">Association Data</span>
+                  <span class="opener">(B) - My Profile</span>
                   <ul>
-                    <li><a href="#">First Sub Menu</a></li>
-                    <li><a href="#">Second Sub Menu</a></li>
-                    <li><a href="#">Third Sub Menu</a></li>
-                  </ul>
-                </li>
-                
-                <li>
-                  <span class="opener">Financial Data</span>
-                  <ul>
-                    <li><a href="#">Sub Menu #1</a></li>
-                    <li><a href="#">Sub Menu #2</a></li>
-                    <li><a href="#">Sub Menu #3</a></li>
-                  </ul>
-                </li>
-                
-                <li>
-                  <span class="opener">Housing Data</span>
-                  <ul>
-                    <li><a href="#">Sub Menu #1</a></li>
-                    <li><a href="#">Sub Menu #2</a></li>
-                    <li><a href="#">Sub Menu #3</a></li>
+                    <li><a href="{%  url 'My_Profile_Detail_ID_URL'         user.pk  %}">1- Basic Data</a></li>
+                    <li><a href="{%  url 'My_Personal_Data_Detail_ID_URL'   user.pk  %}">2- Personal Data</a></li>
+                    <li><a href="{%  url 'My_Financial_Data_Detail_ID_URL'  user.pk  %}">3- Financial Data</a></li>
+                    <li><a href="{%  url 'My_Housing_Data_Detail_ID_URL'    user.pk  %}">4- Housing Data</a></li>
                   </ul>
                 </li>
 
                 <li>
-                  <span class="opener">Personal Data</span>
+                  <span class="opener">(C) - Association Data</span>
                   <ul>
                     <li><a href="#">Sub Menu #1</a></li>
                     <li><a href="#">Sub Menu #2</a></li>
-                    <li><a href="#">Sub Menu #3</a></li>
                   </ul>
                 </li>
+
 {% else %}
-                <li><a href="{% url 'admin:login'  %}">Administrator Login   </a></li>
-                <li><a href="{% url 'login'         %}">Customer     Login</a></li>
-                <li><a href="{% url 'My_Signup_URL' %}">Sign Up       </a></li>
-                <li><a href="{% url 'Index_URL'     %}">Home Page    </a></li>
-                <li><a href="{% url 'About_URL'     %}">About Us     </a></li>
+                <li><a href="{% url 'admin:login'   %}">1- Administrator Login   </a></li>
+                <li><a href="{% url 'login'         %}">2- Customer     Login</a></li>
+                <li><a href="{% url 'My_Signup_URL' %}">3- Sign Up       </a></li>
+                <li><a href="{% url 'Index_URL'     %}">4- Home Page    </a></li>
+                <li><a href="{% url 'About_URL'     %}">5- About Us     </a></li>
 
               </ul>
             </nav>
