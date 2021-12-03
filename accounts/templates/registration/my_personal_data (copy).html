@@ -299,6 +299,13 @@
                                   </th>
                                   <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                       colspan="1" aria-label="" style="">Mobile
+                                  </th>
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">Social Status Married
+                                  </th>                                  
+                                  <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                      colspan="1" aria-label="" style="">Social Status Unmarried
+                                  </th>                                  
                                   <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                       colspan="1" aria-label="" style="">Data Joined
                                   </th>                                  
@@ -329,7 +336,7 @@
                                 </td>
                                 <!-- <td><img src="{{ object_list_item.ASS_AssociationLogo.url}}" alt="" width="150" height="90"></td> -->
                                 <td>{{ object_list_item.pk  }}</td> 
-                                <td>{{ object_list_item.PER_User }}</td>
+                                <td>{{ object_list_item.PER_Customer }}</td>
                                 <td>{{ object_list_item.PER_Avialable }}</td>
                                 <td>{{ object_list_item.FER_Slug }}</td>
                                 <td>{{ object_list_item.PER_FirstName }}</td>
@@ -340,6 +347,8 @@
                                 <td>{{ object_list_item.PER_IdNumber }}</td>
                                 <td>{{ object_list_item.PER_Nationality  }}</td> 
                                 <td>{{ object_list_item.PER_Mobile  }}</td> 
+                                <td>{{ object_list_item.PER_SocialStatusMarried  }}</td> 
+                                <td>{{ object_list_item.PER_SocialStatusUnmarried}}</td>
                                 <td>{{ object_list_item.PER_Date_joined  | date:"M d, Y h:i:s A"}}</td>
                                 
                               </tr>
@@ -489,7 +498,7 @@
                                   </td> -->
                                   <td>{{ object_list_personal_data_item.pk  }}</td> 
                                   <td><img src="{{ object_list_personal_data_item.PER_ImgePersonal.url}}" alt="" width="150" height="90"></td>
-                                  <td>{{ object_list_personal_data_item.PER_User  }}</td> 
+                                  <td>{{ object_list_personal_data_item.PER_Customer  }}</td> 
                                   <td>{{ object_list_personal_data_item.PER_Avialable }}</td>
                                   <td>{{ object_list_personal_data_item.FER_Slug }}</td>
                                   <td>{{ object_list_personal_data_item.PER_FirstName }}</td>

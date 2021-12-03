@@ -38,6 +38,29 @@ from accounts.models import * #  استيراد كل المودل/الجداول
 #
 #
 #
+# # 'admin' ظهور الجداول المطلوبة في صفحة 
+# # 
+# # بينات الجمعية
+# @admin.register(AssociationData_MODEL)
+# class AssociationData_admin(admin.ModelAdmin): # تم وراثة الكلاس ادمن من اجل عمل عليه تعديل/كستمايز
+#     prepopulated_fields = {'ASS_Slug':['ASS_NameAssociation'] , 'ASS_Slug':['ASS_NameAssociation']} # ملئ حقل السلاق تلقائياَمن بيانات حقل إسم الجمعية
+# # 
+# # 
+# # 
+# # البيانات الشخصية
+# @admin.register(PersonalData_MODEL)
+# class PersonalData_admin(admin.ModelAdmin): # تم وراثة الكلاس ادمن من اجل عمل عليه تعديل/كستمايز
+#         FullName = {"FER_Slug": [
+#                             'PER_FirstName' , 
+#                             'PER_FatherName' ,
+#                             'PER_GrandFatherName' ,
+#                             'PER_FamilyName'
+#                             ]} # ملئ حقل السلاق تلقائياَمن بيانات حقل اﻷسم الاول+الاب+الجد+العائلة
+#         prepopulated_fields = FullName
+# 
+# 
+# 
+
 # 'admin' ظهور الجداول المطلوبة في صفحة 
 # 
 # بينات الجمعية
@@ -81,9 +104,9 @@ class PersonalData_admin(admin.ModelAdmin): # The class has been inherited as an
         FullName = {
         "FER_Slug": # Slug Field
         [
-        'PER_FirstName'      , 
-        'PER_FatherName'     ,
-        'PER_GrandFatherName',
+        'PER_FirstName'       , 
+        'PER_FatherName'      ,
+        'PER_GrandFatherName' ,
         'PER_FamilyName'
         ]
         } # ملئ حقل السلاق تلقائياَمن بيانات حقل اﻷسم الاول+الاب+الجد+العائلة
@@ -92,15 +115,15 @@ class PersonalData_admin(admin.ModelAdmin): # The class has been inherited as an
         #
         # Add a Filter Box
         list_filter = (
-        'PER_Customer', 
-        'PER_Mobile'  , 
+        'PER_User'     , 
+        'PER_Mobile'   , 
         'PER_IdNumber'
         )
         #
         #
         # Show Fields a List
         list_display = (
-        'PER_Customer'              , 
+        'PER_User'                  , 
         'PER_Avialable'             , 
         'FER_Slug'                  ,
         'PER_FirstName'             ,
@@ -111,9 +134,8 @@ class PersonalData_admin(admin.ModelAdmin): # The class has been inherited as an
         'PER_IdNumber'              ,
         'PER_Nationality'           ,
         'PER_Mobile'                ,
-        'PER_Mobile'                ,
-        'PER_SocialStatusUnmarried' ,
         'PER_Date_joined'
+        # 'PER_SocialStatusUnmarried' ,
         )
         #
         #
@@ -122,25 +144,25 @@ class PersonalData_admin(admin.ModelAdmin): # The class has been inherited as an
         (None, 
         {
         'fields': (
-        'PER_Customer'          ,
-        'FER_Slug',
+        'PER_User'              ,
+        'FER_Slug'              ,
         'PER_FirstName'         ,
         'PER_FatherName'        ,
         'PER_GrandFatherName'   ,
-        'PER_FamilyName',
+        'PER_FamilyName'        ,
         'PER_ImgePersonal'      ,
         'PER_IdNumber'          ,
-        'PER_Nationality'       ,
-        'PER_Mobile'
         )
         }
         ),
         ('Advanced', {
         'classes': ('collapse',),
         'fields': (
-        'PER_Avialable'             ,
-        'PER_SocialStatusMarried'   ,
-        'PER_SocialStatusUnmarried'
+        'PER_Avialable'    ,
+        'PER_Nationality'  ,
+        'PER_Mobile'
+        # 'PER_SocialStatusMarried'   ,
+        # 'PER_SocialStatusUnmarried'
         )
         }
         ),
@@ -156,7 +178,7 @@ class FinanciaData_admin(admin.ModelAdmin): # The class has been inherited as an
         #
         # Add aFilter Box
         list_filter = (
-        'FIN_Customer'     , 
+        'FIN_User'         , 
         'FIN_BankAccount'  , 
         'FIN_ShareValue'   ,
         'FIN_NumberShares'
@@ -165,17 +187,19 @@ class FinanciaData_admin(admin.ModelAdmin): # The class has been inherited as an
         #
         # Show Fields a List
         list_display = (
-        'FIN_Customer'               , 
+        'FIN_User'                   , 
         'FIN_ShareValue'             , 
         'FIN_NumberShares'           , 
         'FIN_BankName'               , 
         'FIN_BankAccount'            , 
-        'FIN_MethodPaymentCash'      , 
-        'FIN_MethodPaymentCheck'     , 
-        'FIN_MethodPaymentTransfer'  ,
-        'FIN_MethodPayment'          ,
+        'FIN_MethodPayment',
+        'FIN_MethodReceive',
         'FIN_SalaryDisbursementDate' ,
         'FIN_DateShareReceived'
+        # 'FIN_MethodPaymentCash'      , 
+        # 'FIN_MethodPaymentCheck'     , 
+        # 'FIN_MethodPaymentTransfer'  ,
+
         )
         #
         #
@@ -183,7 +207,7 @@ class FinanciaData_admin(admin.ModelAdmin): # The class has been inherited as an
         fieldsets = (
         (None, {
         'fields': (
-        'FIN_Customer'                  , 
+        'FIN_User'                      , 
         'FIN_ShareValue'                , 
         'FIN_NumberShares'              , 
         'FIN_BankName'                  ,  
@@ -196,10 +220,11 @@ class FinanciaData_admin(admin.ModelAdmin): # The class has been inherited as an
         ('Advanced', {
         'classes': ('collapse',)    ,
         'fields': (
-        'FIN_MethodPaymentCash'     ,
-        'FIN_MethodPaymentCheck'    ,
-        'FIN_MethodPaymentTransfer' ,
-        'FIN_MethodPayment'
+        # 'FIN_MethodPaymentCash'     ,
+        # 'FIN_MethodPaymentCheck'    ,
+        # 'FIN_MethodPaymentTransfer' ,
+        'FIN_MethodPayment'           ,
+        'FIN_MethodReceive'
         )
         }
         ),
@@ -214,7 +239,7 @@ class HousingData_admin(admin.ModelAdmin):  # The class has been inherited as an
         #
         # Add aFilter Box
         list_filter = (
-        'HOU_Customer'      , 
+        'HOU_User'      , 
         'HOU_City'          , 
         'HOU_HomeAddress'   ,
         'HOU_CurrentWork'
@@ -223,7 +248,7 @@ class HousingData_admin(admin.ModelAdmin):  # The class has been inherited as an
         #
         # Show Fields a List
         list_display = (
-        'HOU_Customer'     , 
+        'HOU_User'     , 
         'HOU_Region'       , 
         'HOU_City'         , 
         'HOU_District'     , 
@@ -237,11 +262,11 @@ class HousingData_admin(admin.ModelAdmin):  # The class has been inherited as an
         fieldsets = (
         (None, {
         'fields': (
-        'HOU_Customer'     , 
+        'HOU_User'     , 
         'HOU_Region'       , 
         'HOU_City'         , 
         'HOU_District'     , 
-        'HOU_CurrentWork'  , 
+        'HOU_CurrentWork'  
         )
         }
         ),

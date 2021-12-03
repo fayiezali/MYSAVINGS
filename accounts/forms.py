@@ -4,6 +4,13 @@ from django.contrib.auth.models import User
 #
 #
 #
+# class AssociationData_FORM(forms.ModelForm):  
+#         class Meta:  
+#             model = AssociationData_MODEL  
+#             fields = '__all__' # ظهور جميع الحقول في النموذج
+#             # fields = ['ASS_AssociationLogo', 'ASS_NameAssociation'] # ظهور حقول محددة في النموذج
+#
+#
 # Create/Signup Profile For User
 # The model that is customized 
 class SignUpForm(UserCreationForm):

@@ -15,7 +15,34 @@ from django.db.models.signals import post_save # كلاس فكرته: انه ب�
 #   
 # 
 # 
-# # البيانات الشخصية
+# Association Data
+class AssociationData_MODEL(models.Model):
+    ASS_NameAssociation =   models.CharField(max_length=100                       , db_index=True , blank=False , null=False , verbose_name="إسم الجمعية"              ,help_text='هذا الحقل مخصص لإسم الجمعية')
+    ASS_Slug            =   models.SlugField(unique=True                          , db_index=True , blank=False , null=False , verbose_name="الإسم التعريفي")
+    ASS_AssociationLogo =   models.ImageField(upload_to='AssociationData_Image/'  , db_index=True , blank=False , null=False , verbose_name="شعار الجمعية"             ,default='Default_Image.png' )
+    ASS_Address         =   models.CharField(max_length=250                       , db_index=True , blank=False , null=False , verbose_name="العنوان")
+    ASS_Mobile          =   models.CharField(max_length=10                        , db_index=True , blank=False , null=False , verbose_name="الجوال")
+    ASS_Phone           =   models.CharField(max_length=250                       , db_index=True , blank=False , null=False , verbose_name="الهاتف"                   ,help_text='ضع مفتاح المدينة قبل الرقم مثال:012')
+    ASS_Email           =   models.EmailField(max_length=250                      , db_index=True , blank=False , null=False , verbose_name="البريد الألكتروني")
+    ASS_BankAccount     =   models.CharField(max_length=50                        , db_index=True , blank=False , null=False , verbose_name="الحساب البنكي - الآيبان"  ,help_text='مثال: SA000000')
+    # 
+    # 'admin'عرض إسم الحقل في صفحة
+    def __str__(self):
+        return self.ASS_NameAssociation
+    # 
+    class Meta: #'admin'عرض إسم المودل/الجدول في صفحة
+        verbose_name_plural = 'AssociationData_MODEL'
+    # 
+    # 'A-Z' ترتيب تصاعدي 
+    class Meta:
+        ordering = ['ASS_NameAssociation'] 
+# 
+# 
+# 
+# 
+# 
+# 
+# Personal Data
 class PersonalData_MODEL(models.Model):
     # متغير لحفظ رموز الجنسية
     SAUDI    = 'SA'
@@ -38,9 +65,9 @@ class PersonalData_MODEL(models.Model):
 # 
 # 
     # PER_Association            = models.ForeignKey(AssociationData_MODEL           , on_delete=models.CASCADE                 , verbose_name="اسم الجمعية")
-    PER_Customer               = models.OneToOneField(User                         , on_delete=models.CASCADE                 , verbose_name="اسم المشترك")
+    PER_User                   = models.OneToOneField(User                         , on_delete=models.CASCADE                 , verbose_name="اسم المشترك")
     PER_Avialable              = models.BooleanField(default=True                  , db_index=True , blank=False , null=False , verbose_name="حالة المشترك_نشط")
-    FER_Slug                   = models.SlugField(unique=False                      , db_index=True , blank=True  , null=False , verbose_name="الإسم التعريفي")
+    FER_Slug                   = models.SlugField(unique=False                     , db_index=True , blank=True  , null=False , verbose_name="الإسم التعريفي")
     PER_FirstName              = models.CharField(max_length=50                    , db_index=True , blank=False , null=False , verbose_name="الإسم الأول")
     PER_FatherName             = models.CharField(max_length=50                    , db_index=True , blank=False , null=False , verbose_name="إسم الاب")
     PER_GrandFatherName        = models.CharField(max_length=50                    , db_index=True , blank=False , null=False , verbose_name="إسم الجد")
@@ -49,17 +76,17 @@ class PersonalData_MODEL(models.Model):
     PER_IdNumber               = models.CharField(max_length=50                    , db_index=True , blank=False , null=False , verbose_name="رقم الهوية الشخصية")
     PER_Nationality            = models.CharField(max_length=2                     , db_index=True , blank=False , null=False , verbose_name="الجنسية"             , choices=NATIONALITY_CHOICES, default=SAUDI)
     PER_Mobile                 = models.CharField(max_length=10                    , db_index=True , blank=False , null=False , verbose_name="الجوال")
-    PER_SocialStatusMarried    = models.BooleanField(default=True                  , db_index=True , blank=False , null=False , verbose_name="الحالة الإجتماعية - أعزب")
-    PER_SocialStatusUnmarried  = models.BooleanField(default=False                 , db_index=True , blank=False , null=False , verbose_name="الحالة الإجتماعية -متزوج")
     PER_Date_joined            = models.DateTimeField(                               db_index=True , auto_now_add=True,verbose_name="تاريخ الإنضمام للجمعية")
+    # PER_SocialStatusMarried    = models.BooleanField(default=True                  , db_index=True , blank=False , null=False , verbose_name="الحالة الإجتماعية - أعزب")
+    # PER_SocialStatusUnmarried  = models.BooleanField(default=False                 , db_index=True , blank=False , null=False , verbose_name="الحالة الإجتماعية -متزوج")
 # #
     # 'admin'عرض إسم الحقل في صفحة
     def __str__(self):
-        return str(self.PER_Customer)
+        return str(self.PER_User)
     # 
     # 'Z-A' ترتيب تنازلي
     class Meta:
-        ordering = ['PER_Customer'] 
+        ordering = ['PER_User'] 
 ##
     # create_profile: للمستخدم الجديد "profile"دالة تقوم بإنشاء
     # sender: هي فانكش/دالة تقوم بمتابعة الملف الذي ترتبط به فبمجرد قيام الملف المرتبطة به بحدث ما تقوم بتفيذ الكود الموجود فيها 
@@ -78,7 +105,7 @@ class PersonalData_MODEL(models.Model):
 # 
 # 
 #
-# البيانات المالية
+# Financial Data
 class  FinancialData_MODEL(models.Model):
     # متغير لحفظ رموز طريقة الدقع'
     CASH     = 'CA'
@@ -92,25 +119,26 @@ class  FinancialData_MODEL(models.Model):
     ]
     # 
     # FIN_Association             = models.ForeignKey(AssociationData_MODEL , on_delete=models.CASCADE                                              , verbose_name="اسم الجمعية")
-    FIN_Customer                = models.OneToOneField(User               , on_delete=models.CASCADE                                              , verbose_name="اسم المشترك")
+    FIN_User                    = models.OneToOneField(User               , on_delete=models.CASCADE                                              , verbose_name="اسم المشترك")
     FIN_ShareValue              = models.DecimalField(default=50 , max_digits=8 , decimal_places=2   , db_index=True , blank=False  , null=False  , verbose_name="قيمة السهم")
     FIN_NumberShares            = models.IntegerField(default=1                                      , db_index=True , blank=False  , null=False  , verbose_name="عدد الأسهم")
     FIN_BankName                = models.CharField(max_length=50                                     , db_index=True , blank=False  , null=False  , verbose_name="إسم البنك")
     FIN_BankAccount             = models.CharField(max_length=50                                     , db_index=True , blank=False  , null=False  , verbose_name="الحساب البنكي - الآيبان")
-    FIN_MethodPaymentCash       = models.BooleanField(default=True                                   , db_index=True , blank=False  , null=False  , verbose_name="طريقة سداد قيمة اﻷسهم _ نقدا")
-    FIN_MethodPaymentCheck      = models.BooleanField(default=False                                  , db_index=True , blank=False  , null=False  , verbose_name="طريقة سداد قيمة اﻷسهم _ شيك")
-    FIN_MethodPaymentTransfer   = models.BooleanField(default=False                                  , db_index=True , blank=False  , null=False  , verbose_name="طريقة سداد قيمة اﻷسهم _ حوالة")
-    FIN_MethodPayment           = models.CharField(max_length=2                                      , db_index=True , blank=False  , null=False  , verbose_name="طريقة إستلام قيمة اﻷسهم"         , choices=METHOD_PAYMENT_CHOICES , default=CASH)    
+    FIN_MethodPayment           = models.CharField(max_length=2                                      , db_index=True , blank=False  , null=False  , verbose_name="طريقة سداد قيمة اﻷسهم"         , choices=METHOD_PAYMENT_CHOICES , default=CASH)    
+    FIN_MethodReceive           = models.CharField(max_length=2                                      , db_index=True , blank=False  , null=False  , verbose_name="طريقة إستلام قيمة اﻷسهم"         , choices=METHOD_PAYMENT_CHOICES , default=CASH)    
     FIN_SalaryDisbursementDate  = models.DateField(                                                    db_index=True , blank=True   , null=True   , verbose_name="تاريخ صرف الراتب" , help_text='Required Field')
     FIN_DateShareReceived       = models.DateField(                                                    db_index=True , blank=True   , null=True   , verbose_name="تاريخ استلام اﻷسهم/المشاركات/المستحقات" , help_text='Required Field')
+    # FIN_MethodPaymentCash       = models.BooleanField(default=True                                   , db_index=True , blank=False  , null=False  , verbose_name="طريقة سداد قيمة اﻷسهم _ نقدا")
+    # FIN_MethodPaymentCheck      = models.BooleanField(default=False                                  , db_index=True , blank=False  , null=False  , verbose_name="طريقة سداد قيمة اﻷسهم _ شيك")
+    # FIN_MethodPaymentTransfer   = models.BooleanField(default=False                                  , db_index=True , blank=False  , null=False  , verbose_name="طريقة سداد قيمة اﻷسهم _ حوالة")
     # 
     # 'admin'عرض إسم الحقل في صفحة
     def __str__(self):
-        return str(self.FIN_Customer)
+        return str(self.FIN_User)
     # 
     # 'Z-A' ترتيب تنازلي
     class Meta:
-        ordering = ['FIN_Customer'] 
+        ordering = ['FIN_User'] 
 # #
     # create_profile: للمستخدم الجديد "profile"دالة تقوم بإنشاء
     # sender: هي فانكش/دالة تقوم بمتابعة الملف الذي ترتبط به فبمجرد قيام الملف المرتبطة به بحدث ما تقوم بتفيذ الكود الموجود فيها 
@@ -130,10 +158,10 @@ class  FinancialData_MODEL(models.Model):
 # 
 # 
 #
-# بينانات السكن
+# Housing Data
 class  HousingData_MODEL(models.Model):
     # HOU_Association  = models.ForeignKey(AssociationData_MODEL  , on_delete=models.CASCADE                 ,verbose_name="اسم الجمعية")
-    HOU_Customer     = models.OneToOneField(User                , on_delete=models.CASCADE                 ,verbose_name="اسم المشترك")
+    HOU_User         = models.OneToOneField(User                , on_delete=models.CASCADE                 ,verbose_name="اسم المشترك")
     HOU_Region       = models.CharField(max_length=25           , db_index=True , blank=False , null=False ,verbose_name="المنطقة")
     HOU_City         = models.CharField(max_length=25           , db_index=True , blank=False , null=False ,verbose_name="المدينة")
     HOU_District     = models.CharField(max_length=25           , db_index=True , blank=False , null=False ,verbose_name="الحي")
@@ -143,11 +171,11 @@ class  HousingData_MODEL(models.Model):
     # 
     # 'admin'عرض إسم الحقل في صفحة
     def __str__(self):
-        return str(self.HOU_Customer) 
+        return str(self.HOU_User) 
     # 
     # 'Z-A' ترتيب تنازلي
     class Meta:
-        ordering = ['HOU_Customer'] 
+        ordering = ['HOU_User'] 
 # #
 # #
     # create_profile: للمستخدم الجديد "profile"دالة تقوم بإنشاء

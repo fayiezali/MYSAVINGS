@@ -4,6 +4,20 @@ from django.contrib.auth import views as auth_views # This Views Built-in Django
 from accounts import views # This Views I Created It
 #
 #
+# # روابط الصفحات
+# urlpatterns = [
+#     # Home/Index Page URLs:
+#     path('index_home/'                                         , index_home_FUNCTION                             , name='index_home_URL'),
+#     # Association Data URLs:
+#     path('association_data_show_all/'                          , association_data_show_all_FUNCTION              , name='association_data_show_all_URL'), 
+#     path('association_data_show_details_id/<int:id>/'          , association_data_show_details_id_FUNCTION       , name='association_data_show_details_id_URL'), 
+#     path('association_data_show_details_slug/<slug:slug>/'     , association_data_show_details_slug_FUNCTION     , name='association_data_show_details_slug_URL'), 
+#     path('association_data_new/'                               , association_data_new_FUNCTION                   , name='association_data_new_URL'),  
+#     path('association_data_update/<int:id>'                    , association_data_update_FUNCTION                , name='association_data_update_URL'),  
+#     path('association_data_delete/<int:id>'                    , association_data_delete_FUNCTION                , name='association_data_delete_URL'),  
+#     ]
+#
+#
 # AUTHENTICATION:--------------------------------------------------------------------
 urlpatterns = [
 # Login - Logout - Logout Confirm - Logout Done (1) Login (1)
