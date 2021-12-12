@@ -19,7 +19,7 @@ from django.urls import reverse_lazy , reverse
 from django.db.models import Q # new
 from django.http import JsonResponse
 from django.contrib import messages
-from accounts.models import PersonalData_MODEL , FinancialData_MODEL , HousingData_MODEL
+from accounts.models import PersonalData_MODEL , FinancialData_MODEL , HousingData_MODEL , Association_Months_MODEL
 UserModel = get_user_model()
 
 #
@@ -538,4 +538,21 @@ class My_Housing_Data_Update_Done(TemplateView):
 #
 #
 #
-# 
+class My_Dues_Record_ListView_Search(LoginRequiredMixin , TemplateView):    
+#     paginate_by = 4  # if pagination is desired
+    template_name = 'registration/my_dues_record_list.html'# The Page HTML to Display
+    context_object_name = 'queryset_users_list'
+    #
+
+    def get_context_data(self, **kwargs):
+        query = self.request.GET.get('q')# Save Searvh Criterian In a Variable
+        if query:
+            context = super().get_context_data(**kwargs)
+            context['queryset_dues_record_list']    = Association_Months_MODEL.objects.filter(id__icontains=query)
+            # context['queryset_personal_data'] = Association_Months_MODEL.objects.filter(id__icontains=query)
+            return context
+        else:
+            context = super().get_context_data(**kwargs)
+            context['queryset_dues_record_list']    = Association_Months_MODEL.objects.all()
+            # context['queryset_personal_data'] = Association_Months_MODEL.objects.all()
+            return context        

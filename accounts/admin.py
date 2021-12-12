@@ -289,3 +289,66 @@ class HousingData_admin(admin.ModelAdmin):  # The class has been inherited as an
 # 
 # 
 # 
+
+
+
+
+
+
+
+# Comprehensive Record
+@admin.register(Association_Months_MODEL)
+class Association_Months_admin(admin.ModelAdmin):  # The class has been inherited as an addict in order to make a modification / customization 
+        #
+        # Add aFilter Box
+        list_filter = (
+        # 'AM_MonthNumber'       , 
+        'AM_MonthName'         , 
+        'AM_User'              ,
+        'AM_DateShareReceived' ,
+        # 'AM_ShareValue'        ,
+        'AM_NumberShares'      ,
+        'AM_DeservedAmount'    ,
+        # 'AM_Notes'
+        )
+        #
+        #
+        # Show Fields a List
+        list_display = (
+        # 'AM_MonthNumber'       , 
+        'AM_MonthName'         , 
+        'AM_User'              ,
+        'AM_DateShareReceived' ,
+        'AM_ShareValue'        ,
+        'AM_NumberShares'      ,
+        'AM_DeservedAmount'    ,
+        'AM_Notes'
+        )
+        #
+        #
+        # Add Data In Different Sections
+        fieldsets = (
+        (None, {
+        'fields': (
+        # 'AM_MonthNumber'       , 
+        'AM_MonthName'         , 
+        'AM_User'              ,
+        'AM_DateShareReceived' ,
+        'AM_ShareValue'        ,
+        'AM_NumberShares'      ,
+        'AM_DeservedAmount'    ,
+        )
+        }
+        ),
+        ('Advanced', {
+        'classes': ('collapse',) ,
+        'fields': (
+        'AM_Notes',
+        )
+        }
+        ),
+        )
+        # inlines = [PersonalDataInline]
+# 
+# 
+# 

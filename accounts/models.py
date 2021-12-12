@@ -16,26 +16,26 @@ from django.db.models.signals import post_save # كلاس فكرته: انه ب�
 # 
 # 
 # Association Data
-class AssociationData_MODEL(models.Model):
-    ASS_NameAssociation =   models.CharField(max_length=100                       , db_index=True , blank=False , null=False , verbose_name="إسم الجمعية"              ,help_text='هذا الحقل مخصص لإسم الجمعية')
-    ASS_Slug            =   models.SlugField(unique=True                          , db_index=True , blank=False , null=False , verbose_name="الإسم التعريفي")
-    ASS_AssociationLogo =   models.ImageField(upload_to='AssociationData_Image/'  , db_index=True , blank=False , null=False , verbose_name="شعار الجمعية"             ,default='Default_Image.png' )
-    ASS_Address         =   models.CharField(max_length=250                       , db_index=True , blank=False , null=False , verbose_name="العنوان")
-    ASS_Mobile          =   models.CharField(max_length=10                        , db_index=True , blank=False , null=False , verbose_name="الجوال")
-    ASS_Phone           =   models.CharField(max_length=250                       , db_index=True , blank=False , null=False , verbose_name="الهاتف"                   ,help_text='ضع مفتاح المدينة قبل الرقم مثال:012')
-    ASS_Email           =   models.EmailField(max_length=250                      , db_index=True , blank=False , null=False , verbose_name="البريد الألكتروني")
-    ASS_BankAccount     =   models.CharField(max_length=50                        , db_index=True , blank=False , null=False , verbose_name="الحساب البنكي - الآيبان"  ,help_text='مثال: SA000000')
-    # 
-    # 'admin'عرض إسم الحقل في صفحة
-    def __str__(self):
-        return self.ASS_NameAssociation
-    # 
-    class Meta: #'admin'عرض إسم المودل/الجدول في صفحة
-        verbose_name_plural = 'AssociationData_MODEL'
-    # 
-    # 'A-Z' ترتيب تصاعدي 
-    class Meta:
-        ordering = ['ASS_NameAssociation'] 
+# class AssociationData_MODEL(models.Model):
+#     ASS_NameAssociation =   models.CharField(max_length=100                       , db_index=True , blank=False , null=False , verbose_name="إسم الجمعية"              ,help_text='هذا الحقل مخصص لإسم الجمعية')
+#     ASS_Slug            =   models.SlugField(unique=True                          , db_index=True , blank=False , null=False , verbose_name="الإسم التعريفي")
+#     ASS_AssociationLogo =   models.ImageField(upload_to='AssociationData_Image/'  , db_index=True , blank=False , null=False , verbose_name="شعار الجمعية"             ,default='Default_Image.png' )
+#     ASS_Address         =   models.CharField(max_length=250                       , db_index=True , blank=False , null=False , verbose_name="العنوان")
+#     ASS_Mobile          =   models.CharField(max_length=10                        , db_index=True , blank=False , null=False , verbose_name="الجوال")
+#     ASS_Phone           =   models.CharField(max_length=250                       , db_index=True , blank=False , null=False , verbose_name="الهاتف"                   ,help_text='ضع مفتاح المدينة قبل الرقم مثال:012')
+#     ASS_Email           =   models.EmailField(max_length=250                      , db_index=True , blank=False , null=False , verbose_name="البريد الألكتروني")
+#     ASS_BankAccount     =   models.CharField(max_length=50                        , db_index=True , blank=False , null=False , verbose_name="الحساب البنكي - الآيبان"  ,help_text='مثال: SA000000')
+#     # 
+#     # 'admin'عرض إسم الحقل في صفحة
+#     def __str__(self):
+#         return self.ASS_NameAssociation
+#     # 
+#     class Meta: #'admin'عرض إسم المودل/الجدول في صفحة
+#         verbose_name_plural = 'AssociationData_MODEL'
+#     # 
+#     # 'A-Z' ترتيب تصاعدي 
+#     class Meta:
+#         ordering = ['ASS_NameAssociation'] 
 # 
 # 
 # 
@@ -190,9 +190,6 @@ class  HousingData_MODEL(models.Model):
             HousingData_MODEL.objects.create(HOU_Customer=kwargs['instance']) #التي أستقبلتها "'instance'"جديد بناء على  معلومات المستخدم "PersonalData_MODEL" قم بإنشاء ملف 
     # "" "user"والمستخدم  "post_save" الربط بين الفانكشن 
     post_save.connect(create_housing_data , sender=User)
-
-# 
-# 
 # 
 # 
 # 
@@ -227,3 +224,103 @@ class  HousingData_MODEL(models.Model):
 
     # # "" "user"والمستخدم  "post_save" الربط بين الفانكشن 
     # post_save.connect(create_profile , sender=User)
+#
+#
+#
+    # متغير لحفظ رموز طريقة الدقع'
+    CASH     = 'CA'
+    CHECK    = 'CH'
+    TRANSFER = 'TR'
+    # قائمة بطريقة الدفع/الاستلام 
+    METHOD_PAYMENT_CHOICES = [
+        (CASH,     'Cash'),
+        (CHECK,    'Check'),
+        (TRANSFER, 'Transfer'),
+    ]
+
+# Comprehensive Record
+class  Association_Months_MODEL(models.Model):
+    # Variable To Save The Number Of Months
+    CHOOSE_MONTH_NUMBER = '00'
+    JAN                 = '01'
+    FEB                 = '02'
+    MAR                 = '03'
+    APR                 = '04'
+    MAY                 = '05'
+    JUN                 = '06'
+    JUL                 = '07'
+    AUG                 = '08'
+    SEP                 = '09'
+    OCT                 = '10'
+    NOV                 = '11'
+    DEC                 = '12'
+
+    # The Number Of Months 
+    MONTH_NUMBER = [
+    (CHOOSE_MONTH_NUMBER ,  'Choose The Month Number'),
+    (JAN                 ,                       '01'),
+    (FEB                 ,                       '02'),
+    (MAR                 ,                       '03'),
+    (APR                 ,                       '04'),
+    (MAY                 ,                       '05'),
+    (JUN                 ,                       '06'),
+    (JUL                 ,                       '07'),
+    (AUG                 ,                       '08'),
+    (SEP                 ,                       '09'),
+    (OCT                 ,                       '10'),
+    (NOV                 ,                       '11'),
+    (DEC                 ,                       '12'),
+    ]
+    # 
+    #
+    # Variable To Save The Month Code
+    CHOOSE_MONTH_NAME   = 'CMN'
+    JANUARY             = 'JAN'
+    FEBRAURY            = 'FEB'
+    MARCH               = 'MAR'
+    APRIL               = 'APR'
+    MAY                 = 'MAY'
+    JUNE                = 'JUN'
+    JULY                = 'JUL'
+    AUGUST              = 'AUG'
+    SEPTEMBER           = 'SEP'
+    OCTOBER             = 'OCT'
+    NOVEMBER            = 'NOV'
+    DECEMBER            = 'DEC'
+
+    # List Of The Names Of The Months
+    MONTH_NAME = [
+    (CHOOSE_MONTH_NAME  ,  'Choose The Month Name')                 ,
+    (JANUARY            ,  'يناير/January(01)/(05)جمادى الأولى')    ,
+    (FEBRAURY           ,  'فبراير/Febraury(02)/(06)جمادى الثاني')  ,
+    (MARCH              ,  'مارس/March(03)/(07)رجب')                ,
+    (APRIL              ,  'أبريل/April(04)/(08)شعبان')             ,
+    (MAY                ,  'مايو/May(05)/(09)رمضان')                ,
+    (JUNE               ,  'يونيو/June(06)/(10)شوال')               ,
+    (JULY               ,  'يوليو/July(07)/(11)ذو القعدة')          ,
+    (AUGUST             ,  'أغسطس/August(08)/(12)ذو الخجة')         ,
+    (SEPTEMBER          ,  'سبتمبر/Septempber(0)/(01)محرم')         ,
+    (OCTOBER            ,  'أكتوبر/October(10)/(02)صفر')            ,
+    (NOVEMBER           ,  'نوفمبر/November(11)/(03)ربيع اﻷول')     ,
+    (DECEMBER           ,  'ديسمبر/December(12)/(04)ربيع الثاني')   ,
+    ]
+    # 
+    # FIN_Association             = models.ForeignKey(AssociationData_MODEL , on_delete=models.CASCADE                                              , verbose_name="اسم الجمعية")
+    # AM_MonthNumber          = models.CharField(max_length=2                                      , db_index=True , blank=False  , null=False  , verbose_name="رقم الشهر"         , choices=MONTH_NUMBER , default=CHOOSE_MONTH_NUMBER)    
+    AM_MonthName            = models.CharField(max_length=3                                      , db_index=True , blank=False  , null=False  , verbose_name="إسم الشهر"         , choices=MONTH_NAME   , default=CHOOSE_MONTH_NAME)    
+    AM_User                 = models.ForeignKey(User      , on_delete=models.CASCADE                                                       , verbose_name="اسم المشترك")
+    AM_DateShareReceived    = models.DateField(                                                    db_index=True , blank=True   , null=True   , verbose_name="تاريخ استلام اﻷسهم/المشاركات/المستحقات"    , help_text='Required Field')
+    AM_ShareValue           = models.DecimalField(default=50 , max_digits=8 , decimal_places=2   , db_index=True , blank=False  , null=False  , verbose_name="قيمة السهم")
+    AM_NumberShares         = models.IntegerField(default=1                                      , db_index=True , blank=False  , null=False  , verbose_name="عدد الأسهم")
+    AM_DeservedAmount       = models.DecimalField(default=50 , max_digits=8 , decimal_places=2   , db_index=True , blank=False  , null=False  , verbose_name=" المبلغ المستحق")
+    AM_Notes                = models.CharField(max_length=50                                     , db_index=True , blank=True   , null=True   , verbose_name="الملاحظات")    
+
+    # 
+    # 'admin'عرض إسم الحقل في صفحة
+    def __str__(self):
+        return str(self.AM_MonthName)
+    # 
+    # 'Z-A' ترتيب تنازلي
+    class Meta:
+        ordering = ['AM_MonthName'] 
+

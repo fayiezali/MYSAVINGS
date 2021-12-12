@@ -144,3 +144,12 @@ urlpatterns += [
         # Checkout Confirmed Successfull
         path('my_housing_data_update_done/'         , views.My_Housing_Data_Update_Done.as_view()     , name='My_Housing_Data_Update_Done_URL'), 
 ]
+#
+#
+# DUES RECORD:----------------------------------------------------------------------------------------
+urlpatterns +=[
+        # View a List Of The Profiles 
+        path('my_dues_record_list/'                      , views.My_Dues_Record_ListView_Search.as_view()       , name='My_Dues_Record_ListView_Search_URL'),
+        #*********************************************************************************
+
+]
