@@ -325,6 +325,9 @@ class Association_Months_admin(admin.ModelAdmin):  # The class has been inherite
         'AM_Notes'
         )
         #
+        # search list
+        search_fields = ['AM_MonthName']
+        #
         #
         # Add Data In Different Sections
         fieldsets = (

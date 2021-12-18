@@ -548,7 +548,7 @@ class My_Dues_Record_ListView_Search(LoginRequiredMixin , TemplateView):
         query = self.request.GET.get('q')# Save Searvh Criterian In a Variable
         if query:
             context = super().get_context_data(**kwargs)
-            context['queryset_dues_record_list']    = Association_Months_MODEL.objects.filter(id__icontains=query)
+            context['queryset_dues_record_list']    = Association_Months_MODEL.objects.filter(AM_MonthName__icontains=query)
             # context['queryset_personal_data'] = Association_Months_MODEL.objects.filter(id__icontains=query)
             return context
         else:

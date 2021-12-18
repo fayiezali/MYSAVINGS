@@ -299,7 +299,7 @@ class  Association_Months_MODEL(models.Model):
     (JUNE               ,  'يونيو/June(06)/(10)شوال')               ,
     (JULY               ,  'يوليو/July(07)/(11)ذو القعدة')          ,
     (AUGUST             ,  'أغسطس/August(08)/(12)ذو الخجة')         ,
-    (SEPTEMBER          ,  'سبتمبر/Septempber(0)/(01)محرم')         ,
+    (SEPTEMBER          ,  'سبتمبر/Septempber(9)/(01)محرم')         ,
     (OCTOBER            ,  'أكتوبر/October(10)/(02)صفر')            ,
     (NOVEMBER           ,  'نوفمبر/November(11)/(03)ربيع اﻷول')     ,
     (DECEMBER           ,  'ديسمبر/December(12)/(04)ربيع الثاني')   ,

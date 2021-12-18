@@ -69,25 +69,70 @@
 
 {% block Contents_Page %} 
 
-<br>
 
+
+
+
+
+
+
+    
+    
+    
+
+<br>
+<style>
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      padding: 12px 16px;
+      z-index: 1;
+    }
+    
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    </style>
+
+
+
+
+<!-- Base.html - Search Withe Menu Start ------------------------------ -->
 <div class="d-sm-flex align-items-left  mb-4">
-
-    <a href="{% url 'My_Signup_URL' %}" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New</span></a>
-    <a href="#" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>	
-<br>
-<!-- Base.html - Search Box Start ------------------------------ -->
-
-            <section id="search" class="alt"> 
-            <form action="{% url 'My_Profile_ListView_Search_URL' %}" method="get">
-            <input type="text" name="q" id="search" placeholder="Type To Search.......">
-
-            </form>
-            </section>
-            
-<!-- Base.html - Search Box End ------------------------------ -->
-
+<section id="search" class="alt"> 
+    <div class="row">
+        <form action="#" method="get">
+            <label>Month</label>
+                <select name="q">
+                    <option value = "" >Show All/عرض الكل</option>
+                    <option value = "JAN" >يناير/January(01)/(05)جمادى الأولى</option>
+                    <option value = "FEB">فبراير/Febraury(02)/(06)جمادى الثاني</option>
+                    <option value = "MAR" >مارس/March(03)/(07)رجب)</option>
+                    <option value = "APR" >أبريل/April(04)/(08)شعبان</option>
+                    <option value = "MAY">مايو/May(05)/(09)رمضان</option>
+                    <option value = "JUN">يونيو/June(06)/(10)شوال</option>
+                    <option value = "JUL">يوليو/July(07)/(11)ذو القعدة</option>
+                    <option value = "AUG">أغسطس/August(08)/(12)ذو الخجة</option>
+                    <option value = "SEP">سبتمبر/Septempber(9)/(01)محرم</option>
+                    <option value = "OCT">أكتوبر/October(10)/(02)صفر</option>
+                    <option value = "NOV">نوفمبر/November(11)/(03)ربيع اﻷول</option>
+                    <option value = "DEC">ديسمبر/December(12)/(04)ربيع الثاني'</option>
+                <input type="submit" value="OK" />
+        </form>        
+    </div>
+</section> 
 </div>
+<!-- Base.html - Search Withe Menu End ------------------------------ -->
+
+
 
 
 <!-- Content Row -->
@@ -107,13 +152,9 @@
                                   <tr role="row">
                                   <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                       colspan="1" aria-label="" style="">Select
-                                  </th>
                                   <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                  colspan="1" aria-label="" style="">Actions
-                                </th>
-                                  <!-- <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                      colspan="1" aria-label="" style="">Image
-                                  </th> -->
+                                      colspan="1" aria-label="" style="">Nonth Number
+                                  </th>
                                   <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                       colspan="1" aria-label="" style="">Nonth Name
                                   </th>
@@ -135,7 +176,6 @@
                                   <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                       colspan="1" aria-label="" style="">Notes
                                   </th>
-
                               </tr>
                               </thead>
                               <tbody>
@@ -148,24 +188,10 @@
                                           <label class="custom-control-label" for="check{{ object_list_item.pk }}"></label>
                                       </div>
                                   </td>
-                                  <td>
-                                    <div class="dropdown">
-                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                            <i class="dw dw-more"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                            <a class="dropdown-item" href="{% url 'My_Profile_Detail_ID_URL' object_list_item.id  %}"><i class="dw dw-eye"></i> View</a>
-                                            <a class="dropdown-item" href="{% url 'my_profile_update_URL'    object_list_item.id  %}"><i class="dw dw-edit2"></i> Edit</a>
-                                            <a class="dropdown-item" href="{% url 'My_Profile_delete_URL'    object_list_item.id  %}"><i class="dw dw-delete-3"></i> Delete</a>
-                                            <!-- <a class="dropdown-item" href="Delete_Messages_Modal"><i class="dw dw-delete-3"></i> Delete</a> -->
-                                        </div>
-                                    </div>
-                                </td>
-                                <!-- <td><img src="{{ object_list_item.ASS_AssociationLogo.url}}" alt="" width="150" height="90"></td> -->
                                 <td>{{ object_list_item.pk  }}</td> 
                                 <td>{{ object_list_item.AM_MonthName }}</td>
                                 <td>{{ object_list_item.AM_User }}</td>
-                                <td>{{ object_list_item.AM_DateShareReceived | date:"M d, Y h:i:s A"}}</td>
+                                <td>{{ object_list_item.AM_DateShareReceived }}</td>
                                 <td>{{ object_list_item.AM_ShareValue }}</td>
                                 <td>{{ object_list_item.AM_NumberShares }}</td>
                                 <td>{{ object_list_item.AM_DeservedAmount }}</td>
