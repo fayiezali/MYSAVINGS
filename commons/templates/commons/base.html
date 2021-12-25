@@ -145,14 +145,15 @@
                     <li><a href="{%  url 'My_Personal_Data_Detail_ID_URL'      user.pk  %}">2- Personal Data</a></li>
                     <li><a href="{%  url 'My_Financial_Data_Detail_ID_URL'     user.pk  %}">3- Financial Data</a></li>
                     <li><a href="{%  url 'My_Housing_Data_Detail_ID_URL'       user.pk  %}">4- Housing Data</a></li>
-                    <li><a href="{%  url 'My_Dues_Record_ListView_Search_URL'           %}">5- Dues Record</a></li>
+                    <li><a href="{% url 'My_Monthes_Menu_URL'  %}" href="{%  url 'My_Dues_Record_ListView_Search_URL'           %}">5- Dues Record</a></li>
                   </ul>
                 </li>
 
                 <li>
                   <span class="opener">(C) - Dues Record</span>
                   <ul>
-                    <li><a href="#">Sub Menu #1</a></li>
+                    <li><a href="{% url 'My_Monthes_Menu_URL'  %}" >Dues Record #1</a></li> 
+                    <li><a href="{% url 'dmenu' %}"> dmenu</a></li>
                     <li><a href="#">Sub Menu #2</a></li>
                   </ul>
                 </li>

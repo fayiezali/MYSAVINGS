@@ -283,19 +283,11 @@ class HousingData_admin(admin.ModelAdmin):  # The class has been inherited as an
 # 
 # 
 # 
-
 # 
 #
 # 
 # 
 # 
-
-
-
-
-
-
-
 # Comprehensive Record
 @admin.register(Association_Months_MODEL)
 class Association_Months_admin(admin.ModelAdmin):  # The class has been inherited as an addict in order to make a modification / customization 
@@ -355,3 +347,50 @@ class Association_Months_admin(admin.ModelAdmin):  # The class has been inherite
 # 
 # 
 # 
+# Monthes_List
+@admin.register(Monthes_Menu_MODEL)
+class Monthes_Menu_MODEL_admin(admin.ModelAdmin):  # The class has been inherited as an addict in order to make a modification / customization 
+        #
+        # Add aFilter Box
+        list_filter = (
+        'MM_MonthName'      ,
+        )
+        #
+        #
+        # Show Fields a List
+        list_display = (
+        # 'AM_MonthNumber'       , 
+        'MM_MonthName'      , 
+        )
+        #
+        # search list
+        search_fields = ['MM_MonthName']
+        #
+        #
+#
+#
+#
+# Monthes_List
+# @admin.register(main_menu)
+# class main_menu_admin(admin.ModelAdmin):  # The class has been inherited as an addict in order to make a modification / customization 
+#         #
+#         # Add aFilter Box
+#         list_filter = (
+#         'm_menu_id'      ,
+#         'm_menu_name'    ,
+#         )
+#         #
+#         #
+#         # Show Fields a List
+#         list_display = (
+#         # 'AM_MonthNumber'       , 
+#         'm_menu_id'      , 
+#         'm_menu_name'      , 
+#         'm_menu_link'      , 
+
+#         )
+#         #
+#         # search list
+#         search_fields = ['m_menu_name']
+#         #
+#         #

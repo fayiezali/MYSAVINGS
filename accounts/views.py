@@ -19,7 +19,7 @@ from django.urls import reverse_lazy , reverse
 from django.db.models import Q # new
 from django.http import JsonResponse
 from django.contrib import messages
-from accounts.models import PersonalData_MODEL , FinancialData_MODEL , HousingData_MODEL , Association_Months_MODEL
+from accounts.models import PersonalData_MODEL , FinancialData_MODEL , HousingData_MODEL , Association_Months_MODEL , Monthes_Menu_MODEL
 UserModel = get_user_model()
 
 #
@@ -541,18 +541,78 @@ class My_Housing_Data_Update_Done(TemplateView):
 class My_Dues_Record_ListView_Search(LoginRequiredMixin , TemplateView):    
 #     paginate_by = 4  # if pagination is desired
     template_name = 'registration/my_dues_record_list.html'# The Page HTML to Display
-    context_object_name = 'queryset_users_list'
+    # context_object_name = 'queryset_dues_record_list'
     #
 
     def get_context_data(self, **kwargs):
-        query = self.request.GET.get('q')# Save Searvh Criterian In a Variable
+        query = self.request.GET.get('search_tool')# Save Searvh Criterian In a Variable
         if query:
             context = super().get_context_data(**kwargs)
             context['queryset_dues_record_list']    = Association_Months_MODEL.objects.filter(AM_MonthName__icontains=query)
-            # context['queryset_personal_data'] = Association_Months_MODEL.objects.filter(id__icontains=query)
             return context
         else:
             context = super().get_context_data(**kwargs)
             context['queryset_dues_record_list']    = Association_Months_MODEL.objects.all()
-            # context['queryset_personal_data'] = Association_Months_MODEL.objects.all()
             return context        
+#
+#
+# # Search Withe Dynamic Menu
+class My_Monthes_Menu(LoginRequiredMixin , ListView):    
+    # paginate_by = 4  # if pagination is desired
+    template_name = 'registration/my_dues_record_list.html'# The Page HTML to Display
+    context_object_name = 'queryset_monthes_menu'
+    #
+    def get_queryset(self):
+        queryset_monthes_menu = Monthes_Menu_MODEL.objects.all()
+        # queryset_personal_list = PersonalData_MODEL.objects.all()
+        return queryset_monthes_menu  # Send Search Results To The Disired  Page HTML
+
+
+
+
+
+from django.shortcuts import render, redirect
+from django.contrib import auth
+from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from accounts.models import main_menu, sub_menu
+
+
+# Create your views here.
+
+def countown(request):
+    return render(request, 'count.html')
+
+
+def maninmenu(request):
+    menu = main_menu.objects.all()
+    submenu=sub_menu.objects.all()
+    return render(request, 'menu.html', {'menu': menu,'submenu':submenu})
+
+
+def mainsave(request):
+    if request.method == 'POST':
+        mname = request.POST['menu_name']
+        mlink = request.POST['mn_link']
+        main_menu.objects.create(m_menu_name=mname, m_menu_link=mlink)
+        # return HttpResponse("created")
+        return redirect('mainmenu')
+    else:
+        return redirect('mainmenu')
+
+
+def subsave(request):
+    if request.method == 'POST':
+        menuid=request.POST['parent']
+        sname=request.POST['sub_menu_name']
+        slink=request.POST['sub_menu_link']
+        sub_menu.objects.create(m_menu_id=menuid,s_menu_name=sname,s_menu_link=slink)
+        return redirect('mainmenu')
+    else:
+        return redirect('mainmenu')
+
+def dynamic_menu(request):
+    menu = main_menu.objects.all()
+    submenu = sub_menu.objects.all()
+    return render(request, 'dynamic_menu.html', {'menu': menu, 'submenu': submenu})

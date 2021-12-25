@@ -150,6 +150,17 @@ urlpatterns += [
 urlpatterns +=[
         # View a List Of The Profiles 
         path('my_dues_record_list/'                      , views.My_Dues_Record_ListView_Search.as_view()       , name='My_Dues_Record_ListView_Search_URL'),
+        path('my_monthes_menu/'                          , views.My_Monthes_Menu.as_view()                      , name='My_Monthes_Menu_URL'),
         #*********************************************************************************
 
+]
+
+
+
+urlpatterns += [
+    path('', views.countown, name='countdown'),
+    path('main',views.maninmenu,name='mainmenu'),
+    path('mainsave',views.mainsave,name='msave'),
+    path('submenusave',views.subsave,name='submenusave'),
+    path('dmenu',views.dynamic_menu,name='dmenu')
 ]

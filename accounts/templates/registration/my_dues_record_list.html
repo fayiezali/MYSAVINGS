@@ -12,7 +12,7 @@
 
 {% block Page_Title  %}
 <h1>List Dues Record</h1>
-<!-- <h1>{{ now }}</h1> -- >
+<!-- <!-- <h1>{{ now }}</h1> -- > -->
 {% endblock Page_Title %}  
 
 
@@ -51,7 +51,7 @@
 					<div class="modal-footer">
 					
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-						<input  href="{% url 'My_Profile_delete_URL'    object_list_item.id  %}" type="submit" class="btn btn-danger" value="Delete">
+						<input  href="#" type="submit" class="btn btn-danger" value="Delete">
 					</div>
 					{% endfor %}
 				</form>
@@ -69,70 +69,83 @@
 
 {% block Contents_Page %} 
 
-
-
-
-
-
-
-
-    
-    
-    
-
 <br>
-<style>
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-    
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #f9f9f9;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      padding: 12px 16px;
-      z-index: 1;
-    }
-    
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-    </style>
-
-
 
 
 <!-- Base.html - Search Withe Menu Start ------------------------------ -->
-<div class="d-sm-flex align-items-left  mb-4">
+
+<!-- <div class="d-sm-flex align-items-left  mb-4">
 <section id="search" class="alt"> 
-    <div class="row">
-        <form action="#" method="get">
+    <div class="row"> -->
+        <form action="{% url 'My_Dues_Record_ListView_Search_URL' %}" method="get">
             <label>Month</label>
-                <select name="q">
-                    <option value = "" >Show All/عرض الكل</option>
-                    <option value = "JAN" >يناير/January(01)/(05)جمادى الأولى</option>
-                    <option value = "FEB">فبراير/Febraury(02)/(06)جمادى الثاني</option>
-                    <option value = "MAR" >مارس/March(03)/(07)رجب)</option>
-                    <option value = "APR" >أبريل/April(04)/(08)شعبان</option>
-                    <option value = "MAY">مايو/May(05)/(09)رمضان</option>
-                    <option value = "JUN">يونيو/June(06)/(10)شوال</option>
-                    <option value = "JUL">يوليو/July(07)/(11)ذو القعدة</option>
-                    <option value = "AUG">أغسطس/August(08)/(12)ذو الخجة</option>
-                    <option value = "SEP">سبتمبر/Septempber(9)/(01)محرم</option>
-                    <option value = "OCT">أكتوبر/October(10)/(02)صفر</option>
-                    <option value = "NOV">نوفمبر/November(11)/(03)ربيع اﻷول</option>
-                    <option value = "DEC">ديسمبر/December(12)/(04)ربيع الثاني'</option>
-                <input type="submit" value="OK" />
+                <select name="search_tool" >
+                    <option value = "01-January__Jumada Al-Awwal-(05)">01-January__Jumada Al-Awwal-(05)</option>
+                    <option value = "02-February_Jumada Al-Thani-(06)">02-February_Jumada Al-Thani-(06)</option>
+                    <option value = "03-March______________Rajab-(07)">03-March______________Rajab-(07)</option>
+                    <option value = "04-April_____________Shaban-(08)">04-April_____________Shaban-(08)</option>
+                    <option value = "05-May______________Ramadan-(09)">05-May______________Ramadan-(09)</option>
+                    <option value = "06-June_____________Shawwal-(10)">06-June_____________Shawwal-(10)</option>
+                    <option value = "07-July__________Dhul-Qadah-(11)">07-July__________Dhul-Qadah-(11)</option>
+                    <option value = "08-August_______Dhul-Hijjah-(12)">08-August_______Dhul-Hijjah-(12)</option>
+                    <option value = "09-September_______Muharram-(01)">09-September_______Muharram-(01)</option>
+                    <option value = "10-October____________Safar-(02)">10-October____________Safar-(02)</option>
+                    <option value = "11-November___Rabi Al-Awwal-(03)">11-November___Rabi Al-Awwal-(03)</option>
+                    <option value = "12-December___Rabi Al-Thani-(04)">12-December___Rabi Al-Thani-(04)</option>
+                    <option value = ""                                >00-All_______________Al-Kol-(00)</option>
+            <input type="submit" value="OK"/>
         </form>        
-    </div>
+    <!-- </div>
 </section> 
-</div>
+</div> -->
+
+<h1> {{ object_list_item.AM_MonthName }}</h1>
 <!-- Base.html - Search Withe Menu End ------------------------------ -->
 
+<!-- Base.html - Search Withe Dynamic Menu Start ------------------------------ -->
 
+<!-- <div class="d-sm-flex align-items-left  mb-4">
+    <section id="search" class="alt"> 
+        <div class="row">
+            <form action="{% url 'My_Dues_Record_ListView_Search_URL' %}" method="get">
+                {% csrf_token %}
+                <label>Month</label>
+                    <select name="q">
+                        
+                        <option  value = ""  selected="selected">Show All-عرض الكل       </option>
+                        {% for item in queryset_monthes_menu %}
+                        <option  value ="{{ item.MM_MonthName }}">{{ item.MM_MonthName }}</option>
+                        {% endfor %}             
+                        
+                        <input type="submit" value="OK" />
+            </form>        
+        </div>
+    </section> 
+</div> -->
+    
+
+
+
+<!-- 
+
+<form action="#" method="post">
+    {% csrf_token %}
+<section id="search" class="alt"> 
+        <div class="row">
+            <form action="#" method="get">
+                <label>Month</label>
+                    <select name="q">
+                        <option value = ""  selected="selected">Show All-عرض الكل</option>
+                    {% for item in queryset_monthes_menu %}
+                        <option value ="{{ item.MM_MonthName }}">{{ item.MM_MonthName }}</option>
+                    {% endfor %}
+                    </select>
+                <input type="submit" value="OK" />
+            </form>
+    </div>
+</section>
+</form> -->
+    <!-- Base.html - Search Withe Dynamic Menu End ------------------------------ -->
 
 
 <!-- Content Row -->

@@ -274,41 +274,42 @@ class  Association_Months_MODEL(models.Model):
     # 
     #
     # Variable To Save The Month Code
-    CHOOSE_MONTH_NAME   = 'CMN'
-    JANUARY             = 'JAN'
-    FEBRAURY            = 'FEB'
-    MARCH               = 'MAR'
-    APRIL               = 'APR'
-    MAY                 = 'MAY'
-    JUNE                = 'JUN'
-    JULY                = 'JUL'
-    AUGUST              = 'AUG'
-    SEPTEMBER           = 'SEP'
-    OCTOBER             = 'OCT'
-    NOVEMBER            = 'NOV'
-    DECEMBER            = 'DEC'
+    JANUARY             = '01-January__Jumada Al-Awwal-(05)'
+    FEBRUARY            = '02-February_Jumada Al-Thani-(06)'
+    MARCH               = '03-March______________Rajab-(07)'
+    APRIL               = '04-April_____________Shaban-(08)'
+    MAY                 = '05-May______________Ramadan-(09)'
+    JUNE                = '06-June_____________Shawwal-(10)'
+    JULY                = '07-July__________Dhul-Qadah-(11)'
+    AUGUST              = '08-August_______Dhul-Hijjah-(12)'
+    SEPTEMBER           = '09-September_______Muharram-(01)'
+    OCTOBER             = '10-October____________Safar-(02)'
+    NOVEMBER            = '11-November___Rabi Al-Awwal-(03)'
+    DECEMBER            = '12-December___Rabi Al-Thani-(04)'
+    All                 = '00-All_______________Al-Kol-(00)'
+
 
     # List Of The Names Of The Months
     MONTH_NAME = [
-    (CHOOSE_MONTH_NAME  ,  'Choose The Month Name')                 ,
-    (JANUARY            ,  'يناير/January(01)/(05)جمادى الأولى')    ,
-    (FEBRAURY           ,  'فبراير/Febraury(02)/(06)جمادى الثاني')  ,
-    (MARCH              ,  'مارس/March(03)/(07)رجب')                ,
-    (APRIL              ,  'أبريل/April(04)/(08)شعبان')             ,
-    (MAY                ,  'مايو/May(05)/(09)رمضان')                ,
-    (JUNE               ,  'يونيو/June(06)/(10)شوال')               ,
-    (JULY               ,  'يوليو/July(07)/(11)ذو القعدة')          ,
-    (AUGUST             ,  'أغسطس/August(08)/(12)ذو الخجة')         ,
-    (SEPTEMBER          ,  'سبتمبر/Septempber(9)/(01)محرم')         ,
-    (OCTOBER            ,  'أكتوبر/October(10)/(02)صفر')            ,
-    (NOVEMBER           ,  'نوفمبر/November(11)/(03)ربيع اﻷول')     ,
-    (DECEMBER           ,  'ديسمبر/December(12)/(04)ربيع الثاني')   ,
+    (JANUARY            ,  '01-January__Jumada Al-Awwal-(05)')  ,
+    (FEBRUARY           ,  '02-February_Jumada Al-Thani-(06)')  ,
+    (MARCH              ,  '03-March______________Rajab-(07)')  ,
+    (APRIL              ,  '04-April_____________Shaban-(08)')  ,
+    (MAY                ,  '05-May______________Ramadan-(09)')  ,
+    (JUNE               ,  '06-June_____________Shawwal-(10)')  ,
+    (JULY               ,  '07-July__________Dhul-Qadah-(11)')  ,
+    (AUGUST             ,  '08-August_______Dhul-Hijjah-(12)')  ,
+    (SEPTEMBER          ,  '09-September_______Muharram-(01)')  ,
+    (OCTOBER            ,  '10-October____________Safar-(02)')  ,
+    (NOVEMBER           ,  '11-November___Rabi Al-Awwal-(03)')  ,
+    (DECEMBER           ,  '12-December___Rabi Al-Thani-(04)')  ,
+    (All                ,  '00-All_______________Al-Kol-(00)')  ,
     ]
     # 
     # FIN_Association             = models.ForeignKey(AssociationData_MODEL , on_delete=models.CASCADE                                              , verbose_name="اسم الجمعية")
     # AM_MonthNumber          = models.CharField(max_length=2                                      , db_index=True , blank=False  , null=False  , verbose_name="رقم الشهر"         , choices=MONTH_NUMBER , default=CHOOSE_MONTH_NUMBER)    
-    AM_MonthName            = models.CharField(max_length=3                                      , db_index=True , blank=False  , null=False  , verbose_name="إسم الشهر"         , choices=MONTH_NAME   , default=CHOOSE_MONTH_NAME)    
-    AM_User                 = models.ForeignKey(User      , on_delete=models.CASCADE                                                       , verbose_name="اسم المشترك")
+    AM_MonthName            = models.CharField(max_length=50                                     , db_index=True , blank=False  , null=False  , verbose_name="إسم الشهر"         , choices=MONTH_NAME   , default='Please Choose ')    
+    AM_User                 = models.ForeignKey(User         , on_delete=models.CASCADE                                                       , verbose_name="اسم المشترك")
     AM_DateShareReceived    = models.DateField(                                                    db_index=True , blank=True   , null=True   , verbose_name="تاريخ استلام اﻷسهم/المشاركات/المستحقات"    , help_text='Required Field')
     AM_ShareValue           = models.DecimalField(default=50 , max_digits=8 , decimal_places=2   , db_index=True , blank=False  , null=False  , verbose_name="قيمة السهم")
     AM_NumberShares         = models.IntegerField(default=1                                      , db_index=True , blank=False  , null=False  , verbose_name="عدد الأسهم")
@@ -323,4 +324,35 @@ class  Association_Months_MODEL(models.Model):
     # 'Z-A' ترتيب تنازلي
     class Meta:
         ordering = ['AM_MonthName'] 
+#
+#
+#
+#
+#
+#
+class Monthes_Menu_MODEL(models.Model):
+    MM_MonthName = models.CharField(unique=True  , max_length=50)
+    #
+    # 'admin'عرض إسم الحقل في صفحة
+    def __str__(self):
+            return self.MM_MonthName
+    #
+    # تسمية الحدول المطلوب
+    # 'Z-A' ترتيب تنازلي
+    class Meta:
+        ordering = ['MM_MonthName'] 
 
+
+
+# Create your models here.
+class main_menu(models.Model):
+    m_menu_id = models.AutoField(primary_key=True)
+    m_menu_name = models.CharField(max_length=50)
+    m_menu_link = models.CharField(max_length=100)
+
+
+class sub_menu(models.Model):
+    s_menu_id = models.AutoField(primary_key=True)
+    m_menu_id = models.IntegerField()
+    s_menu_name = models.CharField(max_length=50)
+    s_menu_link = models.CharField(max_length=100)
