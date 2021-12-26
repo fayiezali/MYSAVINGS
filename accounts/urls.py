@@ -148,9 +148,9 @@ urlpatterns += [
 #
 # DUES RECORD:----------------------------------------------------------------------------------------
 urlpatterns +=[
-        # View a List Of The Profiles 
+        # View a List Of The Dues Record 
         path('my_dues_record_list/'                      , views.My_Dues_Record_ListView_Search.as_view()       , name='My_Dues_Record_ListView_Search_URL'),
-        path('my_monthes_menu/'                          , views.My_Monthes_Menu.as_view()                      , name='My_Monthes_Menu_URL'),
+        path('accounts/'                          , views.My_Monthes_Menu.as_view()                      , name='My_Monthes_Menu_URL'),
         #*********************************************************************************
 
 ]

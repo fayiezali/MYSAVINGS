@@ -72,7 +72,7 @@
 <br>
 
 
-<!-- Base.html - Search Withe Menu Start ------------------------------ -->
+<!-- Base.html  - Normal Menu - Search Withe Menu Start ---------------------------- -->
 
 <!-- <div class="d-sm-flex align-items-left  mb-4">
 <section id="search" class="alt"> 
@@ -99,53 +99,28 @@
 </section> 
 </div> -->
 
-<h1> {{ object_list_item.AM_MonthName }}</h1>
-<!-- Base.html - Search Withe Menu End ------------------------------ -->
+<!-- Base.html  - Normal Menu - Search Withe Menu End ---------------------------- -->
 
-<!-- Base.html - Search Withe Dynamic Menu Start ------------------------------ -->
+<!-- Base.html  - Dynamic Menu - Search Withe Menu Start ---------------------------- -->
 
-<!-- <div class="d-sm-flex align-items-left  mb-4">
+<div class="d-sm-flex align-items-left  mb-4">
     <section id="search" class="alt"> 
         <div class="row">
-            <form action="{% url 'My_Dues_Record_ListView_Search_URL' %}" method="get">
+            <form action="{% url 'My_Dues_Record_ListView_Search_URL' %}"  method="get">
                 {% csrf_token %}
                 <label>Month</label>
-                    <select name="q">
-                        
-                        <option  value = ""  selected="selected">Show All-عرض الكل       </option>
+                    <select name="search_tool">
+                    
+                        <option value = ""              >00-All_______________Al-Kol-(00)</option>
                         {% for item in queryset_monthes_menu %}
                         <option  value ="{{ item.MM_MonthName }}">{{ item.MM_MonthName }}</option>
                         {% endfor %}             
-                        
                         <input type="submit" value="OK" />
             </form>        
         </div>
     </section> 
-</div> -->
-    
-
-
-
-<!-- 
-
-<form action="#" method="post">
-    {% csrf_token %}
-<section id="search" class="alt"> 
-        <div class="row">
-            <form action="#" method="get">
-                <label>Month</label>
-                    <select name="q">
-                        <option value = ""  selected="selected">Show All-عرض الكل</option>
-                    {% for item in queryset_monthes_menu %}
-                        <option value ="{{ item.MM_MonthName }}">{{ item.MM_MonthName }}</option>
-                    {% endfor %}
-                    </select>
-                <input type="submit" value="OK" />
-            </form>
-    </div>
-</section>
-</form> -->
-    <!-- Base.html - Search Withe Dynamic Menu End ------------------------------ -->
+</div>
+<!-- Base.html  - Dynamic Menu - Search Withe Menu End ---------------------------- -->
 
 
 <!-- Content Row -->

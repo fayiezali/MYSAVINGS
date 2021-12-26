@@ -546,13 +546,21 @@ class My_Dues_Record_ListView_Search(LoginRequiredMixin , TemplateView):
 
     def get_context_data(self, **kwargs):
         query = self.request.GET.get('search_tool')# Save Searvh Criterian In a Variable
+        # verify that The Searvh Tool Is Not Empty Of Data
         if query:
             context = super().get_context_data(**kwargs)
+            # Fill in the list from the database  
+            context['queryset_monthes_menu'] = Monthes_Menu_MODEL.objects.all()
+            # Display Data After Filtering 
             context['queryset_dues_record_list']    = Association_Months_MODEL.objects.filter(AM_MonthName__icontains=query)
+
             return context
         else:
             context = super().get_context_data(**kwargs)
-            context['queryset_dues_record_list']    = Association_Months_MODEL.objects.all()
+            # Fill in the list from the database 
+            context['queryset_monthes_menu'] = Monthes_Menu_MODEL.objects.all()
+            #Display All Data
+            context['queryset_dues_record_list']    = Association_Months_MODEL.objects.all() 
             return context        
 #
 #

@@ -274,6 +274,7 @@ class  Association_Months_MODEL(models.Model):
     # 
     #
     # Variable To Save The Month Code
+    # The Data Will be Saved in the Database 
     JANUARY             = '01-January__Jumada Al-Awwal-(05)'
     FEBRUARY            = '02-February_Jumada Al-Thani-(06)'
     MARCH               = '03-March______________Rajab-(07)'
@@ -290,6 +291,7 @@ class  Association_Months_MODEL(models.Model):
 
 
     # List Of The Names Of The Months
+    # This Data Will Be shown In the Menu
     MONTH_NAME = [
     (JANUARY            ,  '01-January__Jumada Al-Awwal-(05)')  ,
     (FEBRUARY           ,  '02-February_Jumada Al-Thani-(06)')  ,
@@ -317,11 +319,11 @@ class  Association_Months_MODEL(models.Model):
     AM_Notes                = models.CharField(max_length=50                                     , db_index=True , blank=True   , null=True   , verbose_name="الملاحظات")    
 
     # 
-    # 'admin'عرض إسم الحقل في صفحة
+    # Display The Name Of This Field In The Admin Page
     def __str__(self):
         return str(self.AM_MonthName)
     # 
-    # 'Z-A' ترتيب تنازلي
+    # Arrange The Fields In Ascending Order 'Z-A'
     class Meta:
         ordering = ['AM_MonthName'] 
 #
@@ -333,12 +335,11 @@ class  Association_Months_MODEL(models.Model):
 class Monthes_Menu_MODEL(models.Model):
     MM_MonthName = models.CharField(unique=True  , max_length=50)
     #
-    # 'admin'عرض إسم الحقل في صفحة
+    # Display The Name Of This Field In The Admin Page
     def __str__(self):
             return self.MM_MonthName
     #
-    # تسمية الحدول المطلوب
-    # 'Z-A' ترتيب تنازلي
+    # Arrange The Fields In Ascending Order 'Z-A'
     class Meta:
         ordering = ['MM_MonthName'] 
 
