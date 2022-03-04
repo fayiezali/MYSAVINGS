@@ -31,3 +31,10 @@ class About(TemplateView):
 #
 #
 #
+def error_404(request, exception):
+    context = {}
+    return render(request,'commons/404.html' , context)
+
+def error_500(request):
+    context = {}
+    return render(request,'commons/500.html', context)
